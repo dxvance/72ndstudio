@@ -1,0 +1,1549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>David [Last Name]</title>
+<meta name="description" content="David [Last Name] — clinical research, biochemistry, and iOS development in Columbus, Ohio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&text=%E9%B2%A4&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F3EEE3;
+    --ink: #1C1915;
+    --muted: #6B6258;
+    --rule: #DCD2C1;
+    --accent: #A8341F;
+    --sans: "Schibsted Grotesk", system-ui, sans-serif;
+    --serif: "Shippori Mincho", "Hiragino Mincho ProN", Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #15130F; --ink: #ECE5D8; --muted: #A69D90; --rule: #2E2A24; --accent: #E2694F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #15130F; --ink: #ECE5D8; --muted: #A69D90; --rule: #2E2A24; --accent: #E2694F;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--serif); font-size: 1.1rem; line-height: 1.7;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---------- Ink-wash pond hero (always painted on paper) ---------- */
+  .hero {
+    position: relative; height: 100vh; height: 100svh; min-height: 560px;
+    overflow: hidden; background: #EEE8DA; color: #1A1714;
+  }
+  .hero canvas {
+    position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+    touch-action: pan-y;
+  }
+  /* A soft wash of paper behind the words so the koi never fight the text */
+  .hero::after {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      radial-gradient(105% 68% at 0% 100%, rgba(238, 232, 218, .9), rgba(238, 232, 218, 0) 60%),
+      linear-gradient(to bottom, rgba(238, 232, 218, .7), rgba(238, 232, 218, 0) 14%);
+  }
+  .hero.no-gl { background: radial-gradient(120% 90% at 60% 40%, #F3EEE2, #E2D9C6 75%); }
+  .hero.no-gl canvas { display: none; }
+  .hero nav {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 32px; font-family: var(--sans); font-size: .95rem;
+  }
+  .hero nav a { color: #4E473F; text-decoration: none; }
+  .hero nav a:hover { color: #1A1714; }
+  .hero nav a.name { font-family: var(--serif); font-weight: 700; color: #1A1714; font-size: 1.05rem; }
+  .hero nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; }
+
+  .intro {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    padding: 0 32px 104px; pointer-events: none;
+  }
+  .intro > div { max-width: 1080px; margin: 0 auto; }
+  .intro h1 {
+    font-family: var(--serif); font-size: clamp(2.7rem, 7.4vw, 5.4rem);
+    line-height: 1.02; letter-spacing: -.01em; font-weight: 800; margin: 0 0 18px; color: #15120F;
+  }
+  /* A vermilion name seal, as an artist signs a painting: 鲤 (carp) */
+  .seal {
+    display: inline-grid; place-items: center; vertical-align: .9em;
+    font-size: .3em; width: 1.55em; height: 1.55em; margin-left: .55em;
+    background: #B3321F; color: #F6EFE2; border-radius: .14em;
+    font-family: "Ma Shan Zheng", "Kaiti SC", "STKaiti", "KaiTi", serif; font-weight: 400; line-height: 1;
+    box-shadow: inset 0 0 0 .1em #B3321F, inset 0 0 0 .17em rgba(246, 239, 226, .6);
+  }
+  .seal span { font-size: 1.12em; }
+  .nowrap { white-space: nowrap; }
+  .intro .lead { font-size: 1.28rem; line-height: 1.5; margin: 0 0 10px; max-width: 30em; color: #26221D; font-weight: 500; }
+  .intro .sub { margin: 0; max-width: 34em; color: #5D554B; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; font-family: var(--sans); font-size: 1rem; }
+  .btn {
+    padding: 12px 20px; border-radius: 4px; text-decoration: none; font-weight: 500;
+    pointer-events: auto;
+  }
+  .btn.primary { background: #B3321F; color: #FBF5EA; }
+  .btn.primary:hover { background: #962816; }
+  .btn.ghost { border: 1.5px solid rgba(26, 23, 20, .4); color: #1A1714; }
+  .btn.ghost:hover { border-color: #1A1714; }
+  .hero :focus-visible { outline-color: #B3321F; }
+
+  .scroll {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 2;
+    font-family: var(--sans); font-size: .88rem; color: #4E473F; text-decoration: none;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .scroll::after {
+    content: ""; width: 1.5px; height: 28px; background: linear-gradient(#1A1714, transparent);
+    animation: drip 2.4s ease-in-out infinite;
+  }
+  @keyframes drip {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+  @media (max-width: 560px) {
+    .hero nav { padding: 20px 16px; }
+    .hero nav ul { gap: 14px; font-size: .88rem; }
+    .hero nav a.name { display: none; }
+    .intro { padding: 0 16px 104px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll::after { animation: none; }
+  }
+
+  /* ---------- Content ---------- */
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+  section { padding: 64px 0; border-top: 1px solid var(--rule); }
+  section:first-child { border-top: 0; }
+  .sec { display: grid; gap: 20px; }
+  @media (min-width: 880px) { .sec { grid-template-columns: 240px 1fr; gap: 56px; } }
+  .sec h2 { font-family: var(--serif); font-size: 1.6rem; margin: 0; font-weight: 700; line-height: 1.3; }
+  .body { max-width: 680px; }
+  .body > p:first-child { margin-top: 0; }
+
+  .entry { padding: 0 0 28px; margin: 0 0 28px; border-bottom: 1px solid var(--rule); }
+  .entry:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+  .entry h3 { font-family: var(--serif); font-size: 1.2rem; margin: 0; font-weight: 700; line-height: 1.35; }
+  .entry .meta { font-family: var(--sans); font-size: .9rem; color: var(--muted); margin: 4px 0 10px; }
+  .entry p { margin: 0 0 8px; }
+  .entry ul { margin: 8px 0 0; padding-left: 1.1em; }
+  .entry li { margin-bottom: 4px; }
+
+  .figures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0 0 32px; }
+  .figures div { border-left: 3px solid var(--accent); padding-left: 12px; }
+  .figures strong { display: block; font-family: var(--serif); font-size: 2rem; line-height: 1.1; font-weight: 800; }
+  .figures span { font-family: var(--sans); font-size: .88rem; color: var(--muted); line-height: 1.3; display: block; margin-top: 4px; }
+  @media (max-width: 520px) { .figures { grid-template-columns: 1fr; } }
+
+  .systems { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 12px 0 0; font-family: var(--sans); font-size: .9rem; }
+  .systems li { border: 1px solid var(--rule); border-radius: 3px; padding: 5px 10px; }
+
+  footer { border-top: 1px solid var(--rule); padding: 32px 0 48px; font-family: var(--sans); font-size: .9rem; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <canvas id="pond" aria-hidden="true"></canvas>
+
+  <nav aria-label="Main">
+    <a class="name" href="#top">David [Last Name]</a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="intro">
+    <div>
+      <h1>David <span class="nowrap">[Last&nbsp;Name]<span class="seal" aria-hidden="true"><span>鲤</span></span></span></h1>
+      <p class="lead">I keep oncology trial data clean at The James, and I build software on the side.</p>
+      <p class="sub">Biochemistry graduate from Ohio State, now working across seven clinical data systems and studying economics. Based in Columbus, Ohio.</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:you@example.com">Email me</a>
+        <a class="btn ghost" href="resume.pdf">Download résumé</a>
+      </div>
+    </div>
+  </div>
+
+  <a class="scroll" href="#main">Scroll to read</a>
+</header>
+
+<main class="wrap" id="main">
+
+  <section id="work">
+    <div class="sec">
+      <h2>Work</h2>
+      <div class="body">
+        <div class="figures">
+          <div><strong>20+</strong><span>oncology trials supported</span></div>
+          <div><strong>7</strong><span>clinical data systems</span></div>
+          <div><strong>50+</strong><span>data queries resolved weekly</span></div>
+        </div>
+
+        <div class="entry">
+          <h3>Clinical Research Assistant</h3>
+          <div class="meta">The James Cancer Hospital, Ohio State · [Start year]–present</div>
+          <p>Data management and regulatory support for a portfolio of oncology clinical trials.</p>
+          <ul>
+            <li>Enter, reconcile, and query trial data across sponsor EDC and site systems.</li>
+            <li>Resolve 50+ data queries a week to keep studies audit-ready.</li>
+          </ul>
+          <ul class="systems" aria-label="Systems">
+            <li>Medidata Rave</li><li>Veeva Vault</li><li>OnCore</li><li>REDCap</li><li>Advarra</li><li>EDETEK</li><li>PheedIt</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <h3>Laboratory Technician</h3>
+          <div class="meta">Ohio State Wexner Medical Center · [Years]</div>
+          <p>[One or two lines on the lab, techniques, and what you were responsible for.]</p>
+        </div>
+
+        <div class="entry">
+          <h3>Academic Coach</h3>
+          <div class="meta">Dennis Learning Center, Ohio State · [Years]</div>
+          <p>Coached students one-on-one on study strategy, time management, and learning habits.</p>
+        </div>
+
+        <div class="entry">
+          <h3>Undergraduate Teaching Assistant, Biology</h3>
+          <div class="meta">Ohio State University · [Years]</div>
+          <p>[Course name and what you taught or led.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec">
+      <h2>Projects</h2>
+      <div class="body">
+        <div class="entry">
+          <h3>[App name] — flashcards for iOS</h3>
+          <div class="meta">Swift · SwiftUI · Supabase</div>
+          <p>A flashcard app I designed and built in Swift, now heading to the App Store. Next up: daily Mandarin reading passages with comprehension quizzes built in.</p>
+          <p><a href="#">App Store link coming soon</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="sec">
+      <h2>Education</h2>
+      <div class="body">
+        <div class="entry">
+          <h3>B.S. Biochemistry</h3>
+          <div class="meta">The Ohio State University · 2025</div>
+        </div>
+        <div class="entry">
+          <h3>B.A./B.S. Economics, in progress</h3>
+          <div class="meta">The Ohio State University · second degree</div>
+          <p>Coursework in microeconomics and global public health.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="sec">
+      <h2>Outside work</h2>
+      <div class="body">
+        <p>I grew up between Zhenjiang, China and the US, and I'm rebuilding my Mandarin reading every day. I play piano, write, and work evenings in fine-dining service in Columbus, where I've learned more about attention to detail than any lab taught me.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="sec">
+      <h2>Contact</h2>
+      <div class="body">
+        <p>The fastest way to reach me is email: <a href="mailto:you@example.com">you@example.com</a></p>
+        <p><a href="https://www.linkedin.com/in/your-profile">LinkedIn</a> &nbsp;·&nbsp; <a href="https://github.com/your-username">GitHub</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="wrap">
+  <footer>© <span id="yr"></span> David [Last Name] · Columbus, Ohio</footer>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  const hero = document.getElementById('top');
+  const canvas = document.getElementById('pond');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const gl = canvas.getContext('webgl', {
+    alpha: false, antialias: false, premultipliedAlpha: false, powerPreference: 'high-performance'
+  });
+  if (!gl) { hero.classList.add('no-gl'); return; }
+  const aniso = gl.getExtension('EXT_texture_filter_anisotropic') ||
+                gl.getExtension('WEBKIT_EXT_texture_filter_anisotropic');
+
+  /* ================================================================
+     Small helpers
+     ================================================================ */
+  const clamp = (x, a, b) => (x < a ? a : x > b ? b : x);
+  const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+  function rngFrom(seed) {
+    let a = seed >>> 0;
+    return () => {
+      a = (a + 0x6D2B79F5) >>> 0;
+      let t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  const css = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+  // Texture resolution multiplier: 2 on large or high-density screens, set at start-up
+  let RS = 1;
+  // A canvas drawn in base texture units but stored at RS x resolution
+  function mk(w, h) {
+    const c = document.createElement('canvas');
+    c.width = Math.round(w * RS); c.height = Math.round(h * RS);
+    c.getContext('2d').setTransform(RS, 0, 0, RS, 0, 0);
+    return c;
+  }
+  // Copy one same-sized canvas onto another, pixel for pixel
+  function blit(ctx, src) { ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(src, 0, 0); ctx.restore(); }
+
+  /* ================================================================
+     Koi anatomy, in texture space (head at left, tail at right)
+     ================================================================ */
+  const TW = 1024, TH = 256, CY = 128;
+  const X0 = 22;                 // snout
+  const LB = 0.76 * TW;          // snout to tail base
+  const XPED = X0 + LB;          // tail base (caudal peduncle)
+  const HWMAX = 80;              // half-width at the widest point
+  const TAILX = XPED - 16, TAIL_R = 218, TAIL_A = 0.56;
+  const EYE_S = 0.11, EYE_K = 0.9, EYE_R = 7.2;   // eyes sit on the sides of the head
+
+  // Body half-width along the body (s = 0 snout, s = 1 tail base).
+  // Koi are blunt-headed and deep-bodied, so the head rounds off quickly
+  // and the body stays full well past the middle.
+  function hwBody(s) {
+    if (s < 0 || s > 1.05) return 0;
+    const sm = 0.3, ped = 0.23;
+    if (s < sm) return HWMAX * Math.pow(Math.sin(Math.PI / 2 * s / sm), 0.48);
+    if (s <= 1) {
+      const k = (s - sm) / (1 - sm);
+      return HWMAX * (ped + (1 - ped) * Math.pow(Math.cos(Math.PI / 2 * k), 1.0));
+    }
+    const k = (s - 1) / 0.05;
+    return HWMAX * ped * Math.sqrt(Math.max(0, 1 - k * k));
+  }
+  // Tail fin: a broad, softly forked fan with a frilled edge
+  function tailR(a) {
+    const t = Math.abs(a) / TAIL_A;
+    const frill = 1 + 0.008 * Math.sin(a * 23) + 0.006 * Math.sin(a * 47 + 1.3);
+    return TAIL_R * (0.66 + 0.34 * Math.pow(t, 0.9)) * (1 - 0.24 * smooth(0.78, 1, t)) * frill;
+  }
+  // Pectoral / pelvic fin texture (256 x 256): a rounded paddle of rays
+  const FS = 256, FB = { x: 12, y: 128 }, FA0 = -0.74, FA1 = 0.98;
+  function finR(a) {
+    const t = (a - FA0) / (FA1 - FA0);
+    const frill = 1 + 0.007 * Math.sin(a * 19) + 0.005 * Math.sin(a * 41 + 0.7);
+    return 184 * (1 - 0.34 * Math.pow(t, 1.8)) * (1 - 0.2 * smooth(0.8, 1, t)) * (1 - 0.14 * smooth(0.14, 0, t)) * frill;
+  }
+
+  function bodyPath() {
+    const p = new Path2D(), N = 240;
+    for (let i = 0; i <= N; i++) { const s = i / N * 1.05; const x = X0 + s * LB, y = CY - hwBody(s); i ? p.lineTo(x, y) : p.moveTo(x, y); }
+    for (let i = N; i >= 0; i--) { const s = i / N * 1.05; p.lineTo(X0 + s * LB, CY + hwBody(s)); }
+    p.closePath();
+    return p;
+  }
+  function tailPath() {
+    const p = new Path2D(); p.moveTo(TAILX, CY);
+    for (let k = 0; k <= 80; k++) { const a = -TAIL_A + 2 * TAIL_A * k / 80; const r = tailR(a); p.lineTo(TAILX + Math.cos(a) * r, CY + Math.sin(a) * r); }
+    p.closePath();
+    return p;
+  }
+  function finPath() {
+    const p = new Path2D(); p.moveTo(FB.x, FB.y);
+    for (let k = 0; k <= 80; k++) { const a = FA0 + (FA1 - FA0) * k / 80; const r = finR(a); p.lineTo(FB.x + Math.cos(a) * r, FB.y + Math.sin(a) * r); }
+    p.closePath();
+    return p;
+  }
+
+  /* ================================================================
+     Ink-wash painting: koi, fins, petals and the paper itself
+     ================================================================ */
+  // Three inks: deep sumi black, a lighter grey wash, and vermilion
+  const INK = {
+    sumi: { body: [18, 16, 15], belly: [70, 64, 60], core: 1.0, edge: 0.9, net: 'rgba(236,230,216,', netA: 0.2, fin: [98, 80, 68], finA: 0.85, tail: [58, 52, 48], gill: 'rgba(236,230,216,0.22)' },
+    grey: { body: [52, 50, 48], belly: [118, 112, 106], core: 0.93, edge: 0.75, net: 'rgba(28,26,24,', netA: 0.34, fin: [112, 104, 96], finA: 0.72, tail: [104, 98, 92], gill: 'rgba(28,26,24,0.35)' },
+    red:  { body: [204, 36, 26], belly: [226, 76, 56], core: 1.0, edge: 0.9, net: 'rgba(140,18,14,', netA: 0.42, fin: [220, 70, 50], finA: 0.85, tail: [222, 72, 52], gill: 'rgba(140,18,14,0.45)' }
+  };
+  // Nine koi (jiu li) is the traditional wish for abundance; fewer on small screens
+  const KINDS = ['sumi', 'red', 'grey', 'sumi', 'red', 'sumi', 'grey', 'sumi', 'red'];
+  const PAPER = [238, 232, 218];
+
+  const OFF = 4000;
+  // Fill a path with a soft, blurred edge (works in every browser via the shadow trick)
+  function softFill(ctx, path, color, blur) {
+    ctx.save();
+    ctx.shadowColor = color; ctx.shadowBlur = blur * RS; ctx.shadowOffsetX = OFF * RS; ctx.shadowOffsetY = 0;
+    ctx.translate(-OFF, 0); ctx.fillStyle = color; ctx.fill(path);
+    ctx.restore();
+  }
+  function softMask(path, w, h, blur) {
+    const m = mk(w, h), x = m.getContext('2d');
+    softFill(x, path, '#000', blur);
+    return m;
+  }
+
+  // One tapered brush stroke along a curve. "dry" streaks of bare paper run through it,
+  // the flying-white texture of a fast, half-dry brush.
+  function brush(x, rng, p0, p1, p2, w0, w1, color, alpha, dry, leaf) {
+    const N = 32, Lp = [], Rp = [], C = [];
+    for (let i = 0; i <= N; i++) {
+      const t = i / N, it = 1 - t;
+      const px = it * it * p0[0] + 2 * it * t * p1[0] + t * t * p2[0];
+      const py = it * it * p0[1] + 2 * it * t * p1[1] + t * t * p2[1];
+      const dx = 2 * it * (p1[0] - p0[0]) + 2 * t * (p2[0] - p1[0]);
+      const dy = 2 * it * (p1[1] - p0[1]) + 2 * t * (p2[1] - p1[1]);
+      const l = Math.hypot(dx, dy) || 1, nx = -dy / l, ny = dx / l;
+      const press = Math.sin(Math.min(1, t * 5 + 0.25) * Math.PI / 2);
+      const w = leaf
+        ? w0 * Math.pow(Math.sin(Math.PI * (0.06 + t * 0.9)), 0.55) / 2 + w1 / 2
+        : (w0 + (w1 - w0) * Math.pow(t, 0.75)) * press / 2;
+      Lp.push([px + nx * w, py + ny * w]); Rp.push([px - nx * w, py - ny * w]); C.push([px, py, nx, ny, w]);
+    }
+    const path = new Path2D();
+    path.moveTo(Lp[0][0], Lp[0][1]);
+    for (const q of Lp) path.lineTo(q[0], q[1]);
+    for (let i = Rp.length - 1; i >= 0; i--) path.lineTo(Rp[i][0], Rp[i][1]);
+    path.closePath();
+    // Leaf dabs are laid down wet, so their edges bleed softly into the paper
+    if (leaf) softFill(x, path, css(color, alpha), 2.6); else { x.fillStyle = css(color, alpha); x.fill(path); }
+    if (dry) {
+      x.save(); x.clip(path); x.globalCompositeOperation = 'destination-out'; x.lineCap = 'round';
+      for (let k = 0; k < dry; k++) {
+        const o = (rng() - 0.5) * 0.9, t0 = Math.floor(rng() * N * 0.5);
+        x.lineWidth = 0.5 + rng() * 1.4;
+        x.setLineDash([3 + rng() * 22, 2 + rng() * 9]);
+        x.strokeStyle = `rgba(0,0,0,${0.35 + rng() * 0.5})`;
+        x.beginPath();
+        for (let i = t0; i <= N; i++) { const c = C[i]; const X = c[0] + c[2] * c[4] * o, Y = c[1] + c[3] * c[4] * o; i === t0 ? x.moveTo(X, Y) : x.lineTo(X, Y); }
+        x.stroke();
+      }
+      x.restore();
+    }
+    return path;
+  }
+
+  function paintInkTail(ctx, K, rng) {
+    const t = mk(TW, TH), x = t.getContext('2d');
+    const bx = XPED - 18, n = 6 + Math.floor(rng() * 3);
+    for (let k = 0; k < n; k++) {
+      const a = (-1 + 2 * clamp((k + (rng() - 0.5) * 0.6) / (n - 1), 0, 1)) * TAIL_A * 0.95;
+      const R = tailR(a) * (0.8 + rng() * 0.24);
+      const sway = (rng() - 0.5) * 16;
+      brush(x, rng,
+        [bx + rng() * 8, CY + (rng() - 0.5) * 12],
+        [TAILX + Math.cos(a) * R * 0.5, CY + Math.sin(a) * R * 0.42 + sway],
+        [TAILX + Math.cos(a) * R, CY + Math.sin(a) * R],
+        30 + rng() * 18, 2, K.tail, K.finA * (0.55 + rng() * 0.35), 4, true);
+    }
+    blit(ctx, t);
+  }
+
+  // The criss-cross scale net of xieyi koi painting, wrapped around the body
+  function paintNet(ctx, K, rng) {
+    const n = mk(TW, TH), x = n.getContext('2d');
+    const pitch = 28, dth = 0.42;
+    x.lineCap = 'round';
+    for (const dir of [1, -1]) {
+      for (let x0 = X0 + 0.1 * LB - 300; x0 < XPED + 300; x0 += pitch) {
+        x.beginPath();
+        let on = false;
+        for (let th = -1.35; th <= 1.351; th += 0.05) {
+          const px = x0 + dir * th / dth * pitch, s = (px - X0) / LB;
+          if (s < 0.22 || s > 1.0) { on = false; continue; }
+          const y = CY + Math.sin(th) * hwBody(s);
+          if (on) x.lineTo(px, y); else { x.moveTo(px, y); on = true; }
+        }
+        x.lineWidth = 0.9 + rng() * 1.1;
+        x.setLineDash([10 + rng() * 40, 2 + rng() * 10]);
+        x.strokeStyle = K.net + (K.netA * (0.5 + rng() * 0.6)) + ')';
+        x.stroke();
+      }
+    }
+    // Fade the net in behind the gills and let it thin out toward the tail
+    x.globalCompositeOperation = 'destination-in';
+    const g = x.createLinearGradient(X0 + 0.2 * LB, 0, XPED, 0);
+    g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(0.16, 'rgba(0,0,0,1)'); g.addColorStop(1, 'rgba(0,0,0,0.45)');
+    x.fillStyle = g; x.fillRect(0, 0, TW, TH);
+    blit(ctx, n);
+  }
+
+  // The body's ink, computed pixel by pixel: darkest along the back, thinning at the flanks
+  // and toward the tail (much faster than painting it column by column)
+  function bodyWash(K, lean) {
+    const c = mk(TW, TH), x = c.getContext('2d');
+    const DW = c.width, DH = c.height, img = x.createImageData(DW, DH), d = img.data;
+    const stops = (cA, eA) => [
+      [0, K.belly, eA * 0.75], [0.28 + lean, K.body, cA * 0.95], [0.55 + lean, K.body, cA],
+      [0.86, K.belly, eA], [1, K.belly, eA * 0.6]];
+    for (let xd = 0; xd < DW; xd++) {
+      const s = ((xd + 0.5) / RS - X0) / LB, hw = hwBody(s);
+      if (hw <= 0) continue;
+      const fade = smooth(0.6, 1.05, s);
+      const st = stops(K.core * (1 - 0.3 * fade), K.edge * (1 - 0.35 * fade));
+      const y0 = Math.max(0, Math.floor((CY - hw) * RS)), y1 = Math.min(DH - 1, Math.ceil((CY + hw) * RS));
+      for (let yd = y0; yd <= y1; yd++) {
+        const u = ((yd + 0.5) / RS - (CY - hw)) / (2 * hw);
+        if (u <= 0 || u >= 1) continue;
+        let k = 0;
+        while (k < st.length - 2 && u > st[k + 1][0]) k++;
+        const [u0, c0, a0] = st[k], [u1, c1, a1] = st[k + 1];
+        const f = clamp((u - u0) / (u1 - u0), 0, 1);
+        const cover = clamp(Math.min(u, 1 - u) * 2 * hw * RS, 0, 1);
+        const i = (yd * DW + xd) * 4;
+        d[i] = c0[0] + (c1[0] - c0[0]) * f;
+        d[i + 1] = c0[1] + (c1[1] - c0[1]) * f;
+        d[i + 2] = c0[2] + (c1[2] - c0[2]) * f;
+        d[i + 3] = (a0 + (a1 - a0) * f) * cover * 255;
+      }
+    }
+    x.putImageData(img, 0, 0);
+    return c;
+  }
+
+  function paintInkKoi(K, seed) {
+    const rng = rngFrom(seed);
+    const c = mk(TW, TH), ctx = c.getContext('2d');
+    paintInkTail(ctx, K, rng);
+
+    // Body: one loaded brush, darkest along the back, thinning at the flanks and toward the tail
+    const body = bodyPath();
+    const lean = (rng() - 0.5) * 0.3;
+    const b = bodyWash(K, lean), x = b.getContext('2d');
+    x.save(); x.clip(body);
+    // Wet ink pooling unevenly
+    for (let k = 0; k < 16; k++) {
+      const px = X0 + (0.05 + rng() * 0.9) * LB, py = CY + (rng() - 0.5) * HWMAX * 1.4, r = 14 + rng() * 40;
+      const gg = x.createRadialGradient(px, py, 0, px, py, r);
+      const dark = rng() < 0.6;
+      gg.addColorStop(0, css(dark ? K.body : K.belly, dark ? 0.22 : 0.18)); gg.addColorStop(1, css(K.body, 0));
+      x.fillStyle = gg; x.fillRect(px - r, py - r, 2 * r, 2 * r);
+    }
+    // A few sweeping strokes along the body give it the push of a real brush
+    const ns = 3 + Math.floor(rng() * 3);
+    for (let k = 0; k < ns; k++) {
+      const th = (rng() * 2 - 1) * 0.6, s0 = 0.1 + rng() * 0.15, s2 = 0.85 + rng() * 0.15;
+      const yAt = s => CY + Math.sin(th) * hwBody(s) * 0.85;
+      brush(x, rng, [X0 + s0 * LB, yAt(s0)], [X0 + 0.5 * LB, yAt(0.5) + (rng() - 0.5) * 10], [X0 + s2 * LB, yAt(s2)],
+        26 + rng() * 26, 4, K.body, 0.16 + rng() * 0.16, 5);
+    }
+    paintNet(x, K, rng);
+    // Gill line
+    x.beginPath();
+    for (let th = -1.25; th <= 1.25; th += 0.05) {
+      const s = 0.2 + 0.035 * Math.cos(th), px = X0 + s * LB, py = CY + Math.sin(th) * hwBody(s);
+      th === -1.25 ? x.moveTo(px, py) : x.lineTo(px, py);
+    }
+    x.strokeStyle = K.gill; x.lineWidth = 2.2; x.stroke();
+    x.restore();
+
+    // Flying white: streaks of bare paper along the body, and a frayed, brushed edge
+    x.save(); x.globalCompositeOperation = 'destination-out'; x.lineCap = 'round';
+    for (let k = 0; k < 18; k++) {
+      const th0 = (rng() * 2 - 1) * 1.2, s1 = 0.16 + rng() * 0.5, s2 = Math.min(1.02, s1 + 0.12 + rng() * 0.4);
+      x.lineWidth = 0.6 + rng() * 1.8;
+      x.setLineDash([4 + rng() * 28, 2 + rng() * 10]);
+      x.strokeStyle = `rgba(0,0,0,${0.3 + rng() * 0.55})`;
+      x.beginPath();
+      for (let s = s1; s <= s2; s += 0.004) {
+        const th = th0 + 0.08 * Math.sin(s * 23 + k), px = X0 + s * LB, py = CY + Math.sin(th) * hwBody(s);
+        s === s1 ? x.moveTo(px, py) : x.lineTo(px, py);
+      }
+      x.stroke();
+    }
+    x.setLineDash([]);
+    for (const side of [-1, 1]) {
+      for (let k = 0; k < 80; k++) {
+        const s = 0.1 + rng() * 0.95, hw = hwBody(s), px = X0 + s * LB;
+        const py = CY + side * hw * (0.88 + rng() * 0.14);
+        x.lineWidth = 0.8 + rng() * 2.4;
+        x.strokeStyle = `rgba(0,0,0,${0.5 + rng() * 0.5})`;
+        x.beginPath(); x.moveTo(px, py); x.lineTo(px + 6 + rng() * 26, py + side * rng() * 2); x.stroke();
+      }
+    }
+    x.restore();
+    blit(ctx, b);
+
+    // Dorsal fin: a few short strokes along the spine
+    const nd = 4 + Math.floor(rng() * 3);
+    for (let k = 0; k < nd; k++) {
+      const s = 0.38 + 0.34 * k / nd, px = X0 + s * LB, side = rng() < 0.5 ? -1 : 1;
+      brush(ctx, rng, [px, CY], [px + 9, CY + side], [px + 20 + rng() * 8, CY + side * (1 + rng() * 2)],
+        4, 1, K.body, 0.35, 0);
+    }
+
+    // Mouth
+    ctx.beginPath();
+    for (let th = -1.0; th <= 1.0; th += 0.05) {
+      const s = 0.012 + 0.012 * (1 - Math.cos(th)), px = X0 + s * LB, py = CY + Math.sin(th) * hwBody(Math.max(s, 0.02)) * 0.9;
+      th === -1.0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+    }
+    ctx.strokeStyle = K === INK.red ? 'rgba(120,16,12,0.8)' : 'rgba(14,12,11,0.85)'; ctx.lineWidth = 2.6; ctx.stroke();
+
+    // Eyes: the bright orange-gold eye of the painted koi
+    const ex = X0 + EYE_S * LB;
+    for (const sd of [-1, 1]) {
+      const ey = CY + sd * hwBody(EYE_S) * 0.86;
+      const g = ctx.createRadialGradient(ex - 1, ey, 1, ex, ey, 8);
+      g.addColorStop(0, '#F7B941'); g.addColorStop(0.8, '#E9922A'); g.addColorStop(1, 'rgba(170,90,20,0.9)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(ex, ey, 8, 0, 6.28); ctx.fill();
+      ctx.fillStyle = '#0E0C0B'; ctx.beginPath(); ctx.arc(ex - 1.5, ey + sd * 1.2, 3.8, 0, 6.28); ctx.fill();
+    }
+
+    // Barbels: fine curling ink lines
+    ctx.lineCap = 'round';
+    for (const sd of [-1, 1]) {
+      const y0 = CY + sd * hwBody(0.02) * 0.65;
+      ctx.strokeStyle = 'rgba(16,14,13,0.85)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(X0 + 3, y0);
+      ctx.quadraticCurveTo(X0 - 16, y0 + sd * 6, X0 - 10, y0 + sd * (hwBody(0.06) * 0.55 + 16));
+      ctx.stroke();
+    }
+    return c;
+  }
+
+  // Pectoral and pelvic fins: a few broad, quick dabs of the brush
+  function paintInkFin(K, seed) {
+    const rng = rngFrom(seed ^ 0x51ed27);
+    const c = mk(FS, FS), x = c.getContext('2d');
+    const n = 2 + Math.floor(rng() * 2);
+    for (let k = 0; k < n; k++) {
+      const a = FA0 + (FA1 - FA0) * (0.25 + 0.6 * clamp((k + 0.5 + (rng() - 0.5) * 0.5) / n, 0, 1));
+      const R = finR(a) * (0.85 + rng() * 0.2);
+      brush(x, rng,
+        [FB.x + 2, FB.y + (rng() - 0.5) * 10],
+        [FB.x + Math.cos(a) * R * 0.5, FB.y + Math.sin(a) * R * 0.5 + (rng() - 0.5) * 14],
+        [FB.x + Math.cos(a) * R, FB.y + Math.sin(a) * R],
+        76 + rng() * 30, 8, K.fin, K.finA * (0.7 + rng() * 0.3), 3, true);
+    }
+    return c;
+  }
+
+  // A plum-blossom petal in vermilion watercolour
+  function paintPetal(seed) {
+    const rng = rngFrom(seed);
+    const c = mk(64, 64), x = c.getContext('2d');
+    const p = new Path2D();
+    const w = 20 + rng() * 6;
+    p.moveTo(6, 32);
+    p.bezierCurveTo(14, 32 - w, 46, 32 - w * 0.9, 58, 27);
+    p.lineTo(53, 32);
+    p.lineTo(58, 37);
+    p.bezierCurveTo(46, 32 + w * 0.9, 14, 32 + w, 6, 32);
+    p.closePath();
+    softFill(x, p, 'rgba(208,52,38,0.92)', 1.4);
+    const g = x.createRadialGradient(14, 32, 2, 26, 32, 34);
+    g.addColorStop(0, 'rgba(240,120,96,0.55)'); g.addColorStop(1, 'rgba(200,38,28,0)');
+    x.fillStyle = g; x.fill(p);
+    x.strokeStyle = 'rgba(150,22,16,0.45)'; x.lineWidth = 1.3; x.stroke(p);
+    return c;
+  }
+
+  // The paper: grain, faint washes, a brushed enso, willow strands and a few ink flecks
+  function grainTile(rng) {
+    const t = document.createElement('canvas'); t.width = t.height = 256;
+    const x = t.getContext('2d');
+    const img = x.createImageData(256, 256), d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const v = rng();
+      d[i] = 110; d[i + 1] = 98; d[i + 2] = 80; d[i + 3] = v < 0.5 ? v * 22 : 0;
+    }
+    x.putImageData(img, 0, 0);
+    x.lineCap = 'round';
+    for (let k = 0; k < 70; k++) {
+      const px = rng() * 256, py = rng() * 256, a = rng() * Math.PI, l = 6 + rng() * 26;
+      x.strokeStyle = rng() < 0.5 ? 'rgba(120,104,84,0.08)' : 'rgba(255,252,244,0.25)';
+      x.lineWidth = 0.6 + rng();
+      x.beginPath(); x.moveTo(px, py); x.quadraticCurveTo(px + Math.cos(a) * l * 0.5 + 3, py + Math.sin(a) * l * 0.5, px + Math.cos(a) * l, py + Math.sin(a) * l); x.stroke();
+    }
+    return t;
+  }
+
+  function paintPaper() {
+    const c = document.createElement('canvas');
+    c.width = canvas.width; c.height = canvas.height;
+    const x = c.getContext('2d');
+    const rng = rngFrom(20261029);
+    x.setTransform(DPR, 0, 0, DPR, 0, 0);
+    x.fillStyle = css(PAPER); x.fillRect(0, 0, W, H);
+
+    // Large, faint washes, like water seen on silk
+    for (let k = 0; k < 9; k++) {
+      const px = rng() * W, py = rng() * H, r = Math.max(W, H) * (0.15 + rng() * 0.3);
+      const g = x.createRadialGradient(px, py, 0, px, py, r);
+      g.addColorStop(0, `rgba(120,118,112,${0.025 + rng() * 0.04})`); g.addColorStop(1, 'rgba(120,118,112,0)');
+      x.fillStyle = g; x.fillRect(px - r, py - r, 2 * r, 2 * r);
+    }
+    // Misty grey wash rising from the lower right
+    for (let k = 0; k < 26; k++) {
+      const px = W * (0.6 + rng() * 0.45), py = H * (0.72 + rng() * 0.35), r = Math.min(W, H) * (0.06 + rng() * 0.14);
+      const g = x.createRadialGradient(px, py, 0, px, py, r);
+      g.addColorStop(0, `rgba(90,90,88,${0.03 + rng() * 0.05})`); g.addColorStop(1, 'rgba(90,90,88,0)');
+      x.fillStyle = g; x.fillRect(px - r, py - r, 2 * r, 2 * r);
+    }
+
+    // Enso: one unbroken brushed circle, left slightly open
+    const small = W < 700;
+    const ecx = small ? W * 0.52 : W * 0.63, ecy = small ? H * 0.3 : H * 0.44;
+    const ER = Math.min(W, H) * (small ? 0.3 : 0.33);
+    const a0 = -2.35, sweep = Math.PI * 1.86, N = 260;
+    const outer = [], inner = [], mid = [];
+    for (let i = 0; i <= N; i++) {
+      const t = i / N, a = a0 + sweep * t;
+      const w = (4 + 20 * Math.sin(Math.min(1, t * 3 + 0.15) * Math.PI / 2) * (1 - 0.82 * Math.pow(t, 1.6))) * (Math.min(W, H) / 900 + 0.35);
+      const r = ER * (1 + 0.025 * Math.sin(t * 7 + 1) + 0.01 * Math.sin(t * 23));
+      outer.push([ecx + Math.cos(a) * (r + w / 2), ecy + Math.sin(a) * (r + w / 2)]);
+      inner.push([ecx + Math.cos(a) * (r - w / 2), ecy + Math.sin(a) * (r - w / 2)]);
+      mid.push([a, r, w]);
+    }
+    const ep = new Path2D();
+    ep.moveTo(outer[0][0], outer[0][1]);
+    for (const q of outer) ep.lineTo(q[0], q[1]);
+    for (let i = inner.length - 1; i >= 0; i--) ep.lineTo(inner[i][0], inner[i][1]);
+    ep.closePath();
+    x.fillStyle = 'rgba(32,30,28,0.17)'; x.fill(ep);
+    x.save(); x.clip(ep); x.lineCap = 'round';
+    for (let k = 0; k < 14; k++) {
+      const o = (rng() - 0.5) * 0.95, start = Math.floor(rng() * N * 0.4);
+      x.lineWidth = 0.6 + rng() * 1.6;
+      x.setLineDash([6 + rng() * 40, 3 + rng() * 14]);
+      x.strokeStyle = rng() < 0.55 ? css(PAPER, 0.7) : 'rgba(30,28,26,0.12)';
+      x.beginPath();
+      for (let i = start; i <= N; i++) { const [a, r, w] = mid[i]; const rr = r + o * w; const X = ecx + Math.cos(a) * rr, Y = ecy + Math.sin(a) * rr; i === start ? x.moveTo(X, Y) : x.lineTo(X, Y); }
+      x.stroke();
+    }
+    x.restore();
+    x.setLineDash([]);
+
+    // Willow strands hanging from the upper corners, pale green-grey
+    const strand = (sx, sy, len, lean) => {
+      let px = sx, py = sy, a = Math.PI / 2 + lean;
+      x.strokeStyle = 'rgba(96,108,98,0.18)'; x.lineWidth = 1.1;
+      const pts = [];
+      x.beginPath(); x.moveTo(px, py);
+      const steps = 40;
+      for (let i = 0; i < steps; i++) {
+        a += (rng() - 0.5) * 0.06 - lean * 0.02;
+        px += Math.cos(a) * len / steps; py += Math.sin(a) * len / steps;
+        x.lineTo(px, py); pts.push([px, py, a]);
+      }
+      x.stroke();
+      for (let i = 2; i < pts.length; i += 2) {
+        if (rng() < 0.35) continue;
+        const [qx, qy, qa] = pts[i], side = rng() < 0.5 ? 1 : -1;
+        const la = qa + side * (0.1 + rng() * 0.22), ll = (16 + rng() * 22) * (1 - i / pts.length * 0.3);
+        brush(x, rng, [qx, qy], [qx + Math.cos(la) * ll * 0.5, qy + Math.sin(la) * ll * 0.5], [qx + Math.cos(la) * ll, qy + Math.sin(la) * ll],
+          3.6 + rng() * 1.6, 0.6, [104, 122, 108], 0.16 + rng() * 0.14, 0);
+      }
+    };
+    const scale = Math.min(1, W / 1200) * 0.6 + 0.4;
+    const nl = small ? 3 : 6;
+    for (let k = 0; k < nl; k++) strand(W * (0.02 + rng() * 0.22), -10, H * (0.22 + rng() * 0.22) * scale, -0.2 + rng() * 0.25);
+    if (!small) for (let k = 0; k < 3; k++) strand(W * (0.86 + rng() * 0.12), -10, H * (0.14 + rng() * 0.14), 0.1 + rng() * 0.2);
+
+    // Ink flecks around the enso, and a few drops of vermilion
+    for (let k = 0; k < 34; k++) {
+      const a = rng() * Math.PI * 2, d = ER * (0.9 + rng() * 0.5);
+      const px = ecx + Math.cos(a) * d, py = ecy + Math.sin(a) * d;
+      x.fillStyle = `rgba(28,26,24,${0.15 + rng() * 0.35})`;
+      x.beginPath(); x.arc(px, py, 0.6 + rng() * 2.4, 0, 6.28); x.fill();
+    }
+    for (let k = 0; k < 9; k++) {
+      const a = -1.2 + rng() * 1.6, d = ER * (0.5 + rng() * 0.6);
+      x.fillStyle = `rgba(200,44,32,${0.5 + rng() * 0.35})`;
+      x.beginPath(); x.arc(ecx + Math.cos(a) * d, ecy + Math.sin(a) * d, 1.2 + rng() * 2.6, 0, 6.28); x.fill();
+    }
+
+    // Grain over everything, at full device resolution
+    x.setTransform(1, 0, 0, 1, 0, 0);
+    x.fillStyle = x.createPattern(grainTile(rng), 'repeat');
+    x.fillRect(0, 0, c.width, c.height);
+    // A soft, warm vignette at the edges of the sheet
+    const vg = x.createRadialGradient(c.width * 0.55, c.height * 0.45, Math.min(c.width, c.height) * 0.3, c.width * 0.5, c.height * 0.5, Math.max(c.width, c.height) * 0.75);
+    vg.addColorStop(0, 'rgba(150,130,100,0)'); vg.addColorStop(1, 'rgba(150,130,100,0.16)');
+    x.fillStyle = vg; x.fillRect(0, 0, c.width, c.height);
+    return c;
+  }
+
+  /* ================================================================
+     WebGL plumbing
+     ================================================================ */
+  const PREC = '#ifdef GL_FRAGMENT_PRECISION_HIGH\nprecision highp float;\n#else\nprecision mediump float;\n#endif\n';
+
+  const VS_QUAD = `
+    attribute vec2 aPos; varying vec2 vUv;
+    void main(){ vUv = aPos * 0.5 + 0.5; gl_Position = vec4(aPos, 0.0, 1.0); }`;
+
+  const FS_COPY = `
+    uniform sampler2D uTex; varying vec2 vUv;
+    void main(){ gl_FragColor = texture2D(uTex, vUv); }`;
+
+  const VS_MESH = `
+    attribute vec2 aPos; attribute vec2 aUv; attribute vec2 aA; attribute vec2 aC;
+    uniform vec2 uRes; uniform vec2 uOffset;
+    varying vec2 vUv;
+    void main(){
+      vec2 p = aPos + uOffset;
+      gl_Position = vec4(p.x / uRes.x * 2.0 - 1.0, 1.0 - p.y / uRes.y * 2.0, 0.0, 1.0);
+      vUv = aUv;
+    }`;
+
+  // Painted koi: deeper fish soften and fade into the paper like distant ink
+  const FS_KOI = `
+    uniform sampler2D uAlb; uniform float uBias, uDepth; uniform vec3 uPaper;
+    varying vec2 vUv;
+    void main(){
+      vec4 a = texture2D(uAlb, vUv, uBias);
+      if (a.a < 0.003) discard;
+      vec3 c = mix(a.rgb / a.a, uPaper, uDepth * 0.55);
+      float al = a.a * (1.0 - uDepth * 0.3);
+      gl_FragColor = vec4(c * al, al);
+    }`;
+
+  // A faint grey bleed beneath each fish, as if the ink had soaked into damp paper
+  const FS_SHADOW = `
+    uniform sampler2D uAlb; uniform float uAlpha, uBias;
+    varying vec2 vUv;
+    void main(){
+      float a = texture2D(uAlb, vUv, uBias).a;
+      gl_FragColor = vec4(vec3(0.16, 0.15, 0.14) * a * uAlpha, a * uAlpha);
+    }`;
+
+  // Floating petals
+  const FS_SPRITE = `
+    uniform sampler2D uAlb; uniform float uAlpha;
+    varying vec2 vUv;
+    void main(){ gl_FragColor = texture2D(uAlb, vUv) * uAlpha; }`;
+
+  // The water surface: ripples gently bend the painting and are drawn as fine ink rings
+  const FS_COMP = `
+    uniform sampler2D uScene; uniform sampler2D uWave;
+    uniform vec2 uRes; uniform vec2 uWaveScale; uniform vec2 uWaveOff;
+    uniform float uTime, uRefr;
+    varying vec2 vUv;
+    float hash(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
+    void main(){
+      vec2 p = vec2(vUv.x, 1.0 - vUv.y);
+      vec2 g = (texture2D(uWave, p * uWaveScale + uWaveOff).rg - 0.5) * 2.0;
+      vec2 q = p + g * uRefr / uRes;
+      vec3 col = texture2D(uScene, vec2(q.x, 1.0 - q.y)).rgb;
+      float ring = smoothstep(0.05, 0.3, length(g));
+      float lit = clamp(dot(g, vec2(-0.51, -0.86)) * 2.0, 0.0, 1.0);
+      col = mix(col, col * vec3(0.5, 0.52, 0.54), ring * 0.4 * (1.0 - lit));
+      col += vec3(0.035) * ring * lit;
+      col += (hash(gl_FragCoord.xy + fract(uTime)) - 0.5) / 255.0 * 2.0;
+      gl_FragColor = vec4(col, 1.0);
+    }`;
+
+  function shader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+    return s;
+  }
+  function program(vs, fs) {
+    const p = gl.createProgram();
+    gl.attachShader(p, shader(gl.VERTEX_SHADER, vs));
+    gl.attachShader(p, shader(gl.FRAGMENT_SHADER, PREC + fs));
+    gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+    const u = {}, a = {};
+    for (let i = 0, n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS); i < n; i++) { const info = gl.getActiveUniform(p, i); u[info.name] = gl.getUniformLocation(p, info.name); }
+    for (let i = 0, n = gl.getProgramParameter(p, gl.ACTIVE_ATTRIBUTES); i < n; i++) { const info = gl.getActiveAttrib(p, i); a[info.name] = gl.getAttribLocation(p, info.name); }
+    return { p, u, a };
+  }
+  function texFromCanvas(c) {
+    const t = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+    mipParams();
+    return t;
+  }
+  function mipParams() {
+    gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    if (aniso) gl.texParameterf(gl.TEXTURE_2D, aniso.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(8, gl.getParameter(aniso.MAX_TEXTURE_MAX_ANISOTROPY_EXT)));
+  }
+  function plainTex(w, h, data) {
+    const t = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, data || null);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    return t;
+  }
+  function target(w, h, old) {
+    if (old) { gl.deleteTexture(old.tex); gl.deleteFramebuffer(old.fb); }
+    const tex = plainTex(w, h);
+    const fb = gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    return { tex, fb, w, h };
+  }
+
+  /* ================================================================
+     Water surface simulation (runs on a coarse grid on the CPU)
+     ================================================================ */
+  let gw = 0, gh = 0, cur, prev, damp, waveBytes, waveTex, CELL = 4;
+  const DAMP = 0.984, KE = 170, SPONGE = 16;
+  function simResize() {
+    CELL = W * H > 1.6e6 ? 4 : 3;
+    gw = Math.ceil(W / CELL) + 3; gh = Math.ceil(H / CELL) + 3;
+    cur = new Float32Array(gw * gh); prev = new Float32Array(gw * gh);
+    // Waves fade out near the edges instead of bouncing back
+    damp = new Float32Array(gw * gh);
+    for (let y = 0; y < gh; y++) {
+      for (let x = 0; x < gw; x++) {
+        const e = Math.min(x, y, gw - 1 - x, gh - 1 - y);
+        damp[y * gw + x] = DAMP * (e < SPONGE ? 0.8 + 0.2 * Math.sqrt(e / SPONGE) : 1);
+      }
+    }
+    waveBytes = new Uint8Array(gw * gh * 4);
+    for (let i = 0; i < gw * gh; i++) { waveBytes[i * 4] = 128; waveBytes[i * 4 + 1] = 128; waveBytes[i * 4 + 2] = 128; waveBytes[i * 4 + 3] = 255; }
+    if (waveTex) gl.deleteTexture(waveTex);
+    waveTex = plainTex(gw, gh, waveBytes);
+  }
+  function drop(x, y, r, amp) {
+    if (!cur) return;
+    const cx = x / CELL + 1, cy = y / CELL + 1, rc = Math.max(2.6, r / CELL);
+    const x0 = Math.max(1, Math.floor(cx - rc)), x1 = Math.min(gw - 2, Math.ceil(cx + rc));
+    const y0 = Math.max(1, Math.floor(cy - rc)), y1 = Math.min(gh - 2, Math.ceil(cy + rc));
+    for (let yy = y0; yy <= y1; yy++) {
+      for (let xx = x0; xx <= x1; xx++) {
+        const d = Math.hypot(xx - cx, yy - cy);
+        // Displace both time steps so the water starts at rest and rings travel cleanly outward
+        if (d < rc) { const v = amp * (0.5 + 0.5 * Math.cos(Math.PI * d / rc)); cur[yy * gw + xx] += v; prev[yy * gw + xx] += v; }
+      }
+    }
+  }
+  // Wave equation with an isotropic 9-point Laplacian, so rings stay round
+  function simStep() {
+    const w = gw;
+    for (let y = 1; y < gh - 1; y++) {
+      let i = y * w + 1;
+      for (let x = 1; x < w - 1; x++, i++) {
+        const c = cur[i];
+        const lap = (4 * (cur[i - 1] + cur[i + 1] + cur[i - w] + cur[i + w]) +
+                     cur[i - w - 1] + cur[i - w + 1] + cur[i + w - 1] + cur[i + w + 1] - 20 * c) / 6;
+        prev[i] = (2 * c - prev[i] + 0.5 * lap) * damp[i];
+      }
+    }
+    const t = cur; cur = prev; prev = t;
+  }
+  function uploadWave() {
+    const w = gw;
+    for (let y = 1; y < gh - 1; y++) {
+      let i = y * w + 1, j = i * 4;
+      for (let x = 1; x < w - 1; x++, i++, j += 4) {
+        const r = 128 + (cur[i + 1] - cur[i - 1]) * KE, g = 128 + (cur[i + w] - cur[i - w]) * KE;
+        waveBytes[j] = r < 0 ? 0 : r > 255 ? 255 : r;
+        waveBytes[j + 1] = g < 0 ? 0 : g > 255 ? 255 : g;
+      }
+    }
+    gl.bindTexture(gl.TEXTURE_2D, waveTex);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, gw, gh, gl.RGBA, gl.UNSIGNED_BYTE, waveBytes);
+  }
+
+  /* ================================================================
+     Koi: behaviour, swimming motion and mesh
+     ================================================================ */
+  const M = 44;                       // spine points per fish
+  const FLOATS_PER_KOI = (2 * M + 16) * 8;
+  let W = 0, H = 0, DPR = 1, time = 0;
+  const pointer = { x: 0, y: 0, on: false, t: 0 };
+  let kois = [];
+
+  // Where the intro text sits, in canvas coordinates
+  let textZone = null;
+  const introEl = document.querySelector('.intro > div');
+  function measureText() {
+    if (!introEl) { textZone = null; return; }
+    const c = canvas.getBoundingClientRect(), r = introEl.getBoundingClientRect();
+    const tw = Math.min(r.width, 760);
+    textZone = { x0: r.left - c.left - 20, y0: r.top - c.top - 20, x1: r.left - c.left + tw + 20, y1: r.bottom - c.top + 20 };
+  }
+  function inTextZone(x, y, pad) {
+    const z = textZone;
+    return !!z && x > z.x0 - pad && x < z.x1 + pad && y > z.y0 - pad && y < z.y1 + pad;
+  }
+
+  const baseL = () => clamp(Math.min(W, H) * 0.36, 130, 340);
+
+  function put(D, o, x, y, u, v, ax, ay, cx, cy) {
+    D[o] = x; D[o + 1] = y; D[o + 2] = u; D[o + 3] = v; D[o + 4] = ax; D[o + 5] = ay; D[o + 6] = cx; D[o + 7] = cy;
+    return o + 8;
+  }
+
+  class Koi {
+    constructor(kind) {
+      this.kind = kind; this.K = INK[kind];
+      this.dance = false;
+      this.seed = (Math.random() * 1e9) | 0;
+      this.rand = rngFrom(this.seed ^ 0x9e3779b9);
+      const r = this.rand;
+      this.L = baseL() * (0.78 + r() * 0.4);
+      this.girth = 0.94 + r() * 0.14;
+      this.z = r() * 0.45; this.zt = this.z; this.zTimer = 4 + r() * 8;
+      this.a = r() * Math.PI * 2; this.av = 0;
+      this.cruise = this.L * (0.17 + r() * 0.12);
+      this.v = this.cruise; this.burst = 0;
+      this.phase = r() * 6.28; this.finPhase = r() * 6.28;
+      this.glide = false; this.glideTimer = 2 + r() * 5; this.ampF = 1;
+      this.kiss = 4 + r() * 10; this.kissQueue = 0; this.kissT = 0;
+      this.ns = r() * 100;
+      this.seg = this.L / (M - 1);
+      const hx = W * (0.12 + r() * 0.76), hy = H * (0.12 + r() * 0.76);
+      this.pts = [];
+      for (let i = 0; i < M; i++) this.pts.push({ x: hx - Math.cos(this.a) * this.seg * i, y: hy - Math.sin(this.a) * this.seg * i });
+      this.rx = new Float32Array(M); this.ry = new Float32Array(M);
+      this.tnx = new Float32Array(M); this.tny = new Float32Array(M);
+      this.sc = 1;
+      this.pickGoal();
+      this.alb = texFromCanvas(paintInkKoi(this.K, this.seed));
+      this.finAlb = texFromCanvas(paintInkFin(this.K, this.seed));
+      this.pose();
+    }
+    pickGoal() {
+      // Prefer open water, away from the intro text
+      for (let tries = 0; tries < 8; tries++) {
+        this.gx = W * (0.08 + this.rand() * 0.84);
+        this.gy = H * (0.1 + this.rand() * 0.8);
+        if (!inTextZone(this.gx, this.gy, 0)) break;
+      }
+      this.timer = 5 + this.rand() * 6;
+    }
+    startle(x, y, strength) {
+      const h = this.pts[0], m = this.pts[M >> 1];
+      const d = Math.min(Math.hypot(h.x - x, h.y - y), Math.hypot(m.x - x, m.y - y));
+      const R = this.L * 1.1 * strength;
+      if (d > R || this.z > 0.8) return;
+      this.dance = false;
+      const ex = m.x - x, ey = m.y - y, dl = Math.hypot(ex, ey) || 1;
+      this.gx = clamp(m.x + ex / dl * this.L * 2.5, W * 0.05, W * 0.95);
+      this.gy = clamp(m.y + ey / dl * this.L * 2.5, H * 0.05, H * 0.95);
+      this.timer = 3;
+      this.burst = this.L * (1.1 + 0.6 * (1 - d / R)) * strength;
+      this.zt = Math.min(0.95, this.z + 0.3 + this.rand() * 0.2);
+      this.zTimer = 5 + this.rand() * 4;
+      this.glide = false;
+    }
+    update(dt, t) {
+      const r = this.rand, h = this.pts[0];
+      // Drift up and down through the water
+      this.zTimer -= dt;
+      if (this.zTimer <= 0) { this.zt = Math.pow(r(), 1.6) * 0.6; this.zTimer = 6 + r() * 10; }
+      // Koi passing beneath the text glide deeper, so the words stay readable
+      const under = inTextZone(this.pts[M >> 1].x, this.pts[M >> 1].y, this.L * 0.25);
+      if (under && this.zt < 0.6) { this.zt = 0.6 + r() * 0.15; this.zTimer = Math.max(this.zTimer, 3); }
+      this.z += (this.zt - this.z) * Math.min(1, dt * (under ? 0.9 : 0.22));
+
+      this.timer -= dt;
+      if (!this.dance && (this.timer <= 0 || Math.hypot(this.gx - h.x, this.gy - h.y) < this.L * 0.5)) this.pickGoal();
+      let dx = this.gx - h.x, dy = this.gy - h.y;
+      const dl = Math.hypot(dx, dy) || 1; dx /= dl; dy /= dl;
+
+      // Give each other room
+      for (const o of kois) {
+        if (o === this || (this.dance && o.dance)) continue;
+        const m = o.pts[M >> 1], ex = h.x - m.x, ey = h.y - m.y, d = Math.hypot(ex, ey) || 1;
+        const R = (this.L + o.L) * 0.38;
+        if (d < R && Math.abs(this.z - o.z) < 0.4) { const f = (1 - d / R) * 1.6; dx += ex / d * f; dy += ey / d * f; }
+      }
+      // Shy away from a hand near the surface
+      if (pointer.on && this.z < 0.65) {
+        const ex = h.x - pointer.x, ey = h.y - pointer.y, d = Math.hypot(ex, ey) || 1, R = this.L * 0.75;
+        if (d < R) { const f = (1 - d / R) * 2.2; dx += ex / d * f; dy += ey / d * f; }
+      }
+      const mg = this.L * 0.3;
+      if (h.x < -mg) dx += 1.5; if (h.x > W + mg) dx -= 1.5;
+      if (h.y < -mg) dy += 1.5; if (h.y > H + mg) dy -= 1.5;
+
+      const want = Math.atan2(dy, dx);
+      let diff = want - this.a; diff = Math.atan2(Math.sin(diff), Math.cos(diff));
+      const bursting = this.burst > 0.05 * this.L;
+      const maxW = Math.min(bursting ? 3.2 : 1.3, this.v / (0.42 * this.L) + 0.18);
+      const tav = clamp(diff * 1.3, -maxW, maxW);
+      this.av += (tav - this.av) * Math.min(1, dt * (bursting ? 6 : 2.2));
+      this.a += this.av * dt;
+
+      // Alternate between swimming and gliding
+      this.glideTimer -= dt;
+      if (this.glideTimer <= 0) {
+        this.glide = !this.glide && r() < 0.6;
+        this.glideTimer = this.glide ? 1.5 + r() * 2.5 : 3 + r() * 6;
+      }
+      const nz = 0.5 + 0.28 * Math.sin(t * 0.19 + this.ns) + 0.22 * Math.sin(t * 0.11 + this.ns * 1.7);
+      const vt = this.cruise * (0.65 + 0.7 * nz) * (this.glide ? 0.5 : 1) + this.burst;
+      this.burst *= Math.exp(-dt * 1.3);
+      this.v += (vt - this.v) * Math.min(1, dt * (this.glide ? 0.5 : 1.4));
+
+      h.x += Math.cos(this.a) * this.v * dt;
+      h.y += Math.sin(this.a) * this.v * dt;
+      for (let i = 1; i < M; i++) {
+        const p = this.pts[i - 1], c = this.pts[i];
+        const ex = c.x - p.x, ey = c.y - p.y, d = Math.hypot(ex, ey) || 1;
+        c.x = p.x + ex / d * this.seg; c.y = p.y + ey / d * this.seg;
+      }
+
+      // Tail beat and fin sculling
+      const sw = clamp(this.v / (0.45 * this.L), 0, 1);
+      const ampT = (0.28 + 0.72 * sw) * (this.glide ? 0.35 : 1) + clamp(this.burst / this.L, 0, 1) * 0.6;
+      this.ampF += (ampT - this.ampF) * Math.min(1, dt * 1.5);
+      this.phase += Math.PI * 2 * (0.45 + 1.5 * this.v / this.L) * dt;
+      this.finPhase += Math.PI * 2 * (0.5 + 0.4 * (1 - sw)) * dt;
+
+      // Rising koi sometimes kiss the surface
+      if (!reduce) {
+        this.kiss -= dt;
+        if (this.kiss <= 0) {
+          if (this.z < 0.22) { this.kissQueue = 2 + Math.floor(r() * 2); this.kissT = 0; }
+          this.kiss = 7 + r() * 12;
+        }
+        if (this.kissQueue > 0) {
+          this.kissT -= dt;
+          if (this.kissT <= 0) {
+            drop(h.x + Math.cos(this.a) * this.seg * 0.4, h.y + Math.sin(this.a) * this.seg * 0.4, 8, 1.6);
+            this.kissQueue--; this.kissT = 0.3;
+          }
+        }
+        if (this.burst > this.L * 0.4 && this.z < 0.3) {
+          const tp = this.pts[M - 4];
+          drop(tp.x, tp.y, 7, 0.35);
+        }
+      }
+      this.pose();
+    }
+    pose() {
+      const P = this.pts, sc = 1 - 0.13 * this.z, mid = P[M >> 1];
+      for (let i = 0; i < M; i++) {
+        const a = P[Math.max(0, i - 1)], b = P[Math.min(M - 1, i + 1)];
+        let tx = b.x - a.x, ty = b.y - a.y; const l = Math.hypot(tx, ty) || 1; tx /= l; ty /= l;
+        const s = i / (M - 1);
+        const A = this.L * (0.006 + 0.07 * s * s) * this.ampF;
+        const off = A * Math.sin(this.phase - s * Math.PI * 1.8);
+        const px = P[i].x - ty * off, py = P[i].y + tx * off;
+        this.rx[i] = mid.x + (px - mid.x) * sc; this.ry[i] = mid.y + (py - mid.y) * sc;
+      }
+      for (let i = 0; i < M; i++) {
+        const ia = Math.max(0, i - 1), ib = Math.min(M - 1, i + 1);
+        let tx = this.rx[ib] - this.rx[ia], ty = this.ry[ib] - this.ry[ia];
+        const l = Math.hypot(tx, ty) || 1;
+        this.tnx[i] = tx / l; this.tny[i] = ty / l;
+      }
+      this.sc = sc;
+    }
+    writeMesh(D, o) {
+      const hw = 0.125 * this.L * this.girth * this.sc;
+      for (let i = 0; i < M; i++) {
+        const x = this.rx[i], y = this.ry[i], tx = this.tnx[i], ty = this.tny[i], cx = -ty, cy = tx, u = i / (M - 1);
+        o = put(D, o, x - cx * hw, y - cy * hw, u, 0, tx, ty, cx, cy);
+        o = put(D, o, x + cx * hw, y + cy * hw, u, 1, tx, ty, cx, cy);
+      }
+      const up = (X0 + 0.215 * LB) / TW, uv = (X0 + 0.5 * LB) / TW;
+      o = this.fin(D, o, up, 1, 0.75, 0.24, true);
+      o = this.fin(D, o, up, -1, 0.75, 0.24, true);
+      o = this.fin(D, o, uv, 1, 0.55, 0.15, false);
+      o = this.fin(D, o, uv, -1, 0.55, 0.15, false);
+      return o;
+    }
+    fin(D, o, u, side, inset, lenK, pect) {
+      const f = u * (M - 1), i0 = Math.min(M - 2, Math.floor(f)), k = f - i0;
+      const x = this.rx[i0] + (this.rx[i0 + 1] - this.rx[i0]) * k;
+      const y = this.ry[i0] + (this.ry[i0 + 1] - this.ry[i0]) * k;
+      let tx = this.tnx[i0] + (this.tnx[i0 + 1] - this.tnx[i0]) * k;
+      let ty = this.tny[i0] + (this.tny[i0 + 1] - this.tny[i0]) * k;
+      const tl = Math.hypot(tx, ty) || 1; tx /= tl; ty /= tl;
+      const cx = -ty, cy = tx;
+      const hwb = hwBody((u * TW - X0) / LB) / TW * this.L * this.girth * this.sc;
+      const ax = x + cx * side * hwb * inset, ay = y + cy * side * hwb * inset;
+      const sw = clamp(this.v / (0.7 * this.L), 0, 1);
+      let spread = pect
+        ? (1.1 - 0.55 * sw) + 0.2 * Math.sin(this.finPhase + side * 0.7)
+        : (0.55 - 0.15 * sw) + 0.08 * Math.sin(this.finPhase * 0.8 + side);
+      spread += clamp(this.av * side * 0.25, -0.2, 0.25);
+      const ca = Math.cos(spread), sa = Math.sin(spread);
+      const fx = tx * ca + cx * side * sa, fy = ty * ca + cy * side * sa;
+      let hx = -fy, hy = fx;
+      if (hx * -tx + hy * -ty < 0) { hx = -hx; hy = -hy; }
+      const Lf = this.L * lenK * this.sc * (pect ? 0.9 + 0.1 * Math.sin(this.finPhase + side) : 1);
+      const b = FB.x / FS;
+      const ox = ax - fx * Lf * b, oy = ay - fy * Lf * b;
+      const corners = [[0, 0], [0, 1], [1, 0], [1, 1]];
+      for (const [uu, vv] of corners) {
+        o = put(D, o, ox + fx * Lf * uu + hx * (0.5 - vv) * Lf, oy + fy * Lf * uu + hy * (0.5 - vv) * Lf, uu, vv, fx, fy, -hx, -hy);
+      }
+      return o;
+    }
+    destroy() { gl.deleteTexture(this.alb); gl.deleteTexture(this.finAlb); }
+  }
+
+  /* ================================================================
+     Petals drifting on the surface
+     ================================================================ */
+  let petals = [], petalTex = [], petalBuf = null, petalData = null;
+  function makePetals() {
+    const n = W < 640 ? 8 : 14;
+    petals = Array.from({ length: n }, (_, i) => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: 0, vy: 0, a: Math.random() * 6.28, va: (Math.random() - 0.5) * 0.4,
+      s: 9 + Math.random() * 7, ph: Math.random() * 10, tex: i % petalTex.length
+    }));
+    petalData = new Float32Array(n * 6 * 8);
+  }
+  function updatePetals(dt, t) {
+    for (const p of petals) {
+      // A light breeze, plus the slope of the water: petals slide off ripple crests
+      const wx = 7 + 4 * Math.sin(t * 0.07 + p.ph), wy = 2.5 + 2 * Math.cos(t * 0.05 + p.ph);
+      let gx = 0, gy = 0;
+      const cx = Math.round(p.x / CELL + 1), cy = Math.round(p.y / CELL + 1);
+      if (cx > 1 && cy > 1 && cx < gw - 2 && cy < gh - 2) {
+        const i = cy * gw + cx;
+        gx = cur[i + 1] - cur[i - 1]; gy = cur[i + gw] - cur[i - gw];
+      }
+      p.vx += ((wx - p.vx) * 0.6 - gx * 900) * dt;
+      p.vy += ((wy - p.vy) * 0.6 - gy * 900) * dt;
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      p.a += (p.va + gx * 3) * dt;
+      const m = 30;
+      if (p.x > W + m) p.x = -m; if (p.x < -m) p.x = W + m;
+      if (p.y > H + m) p.y = -m; if (p.y < -m) p.y = H + m;
+    }
+  }
+  function writePetals() {
+    let o = 0;
+    for (const p of petals) {
+      const c = Math.cos(p.a), s = Math.sin(p.a), h = p.s;
+      const corner = (u, v) => [p.x + (u - 0.5) * 2 * h * c - (v - 0.5) * 2 * h * s, p.y + (u - 0.5) * 2 * h * s + (v - 0.5) * 2 * h * c];
+      for (const [u, v] of [[0, 0], [1, 0], [0, 1], [0, 1], [1, 0], [1, 1]]) {
+        const [x, y] = corner(u, v);
+        o = put(petalData, o, x, y, u, v, 0, 0, 0, 0);
+      }
+    }
+  }
+
+  /* ================================================================
+     Two koi circling each other, a living yin and yang
+     ================================================================ */
+  let dance = null, danceTimer = 9;
+  function updateDance(dt) {
+    if (dance) {
+      dance.t += dt; dance.ang += dance.w * dt;
+      const [A, B] = dance.pair;
+      [[A, 0], [B, Math.PI]].forEach(([k, off]) => {
+        const ang = dance.ang + off + 0.75 * Math.sign(dance.w);
+        k.gx = dance.cx + Math.cos(ang) * dance.r;
+        k.gy = dance.cy + Math.sin(ang) * dance.r;
+        k.timer = 1;
+        if (k.zt > 0.15) { k.zt = 0.08; k.zTimer = 3; }
+      });
+      if (dance.t > dance.dur || !A.dance || !B.dance) {
+        A.dance = B.dance = false; dance = null; danceTimer = 16 + Math.random() * 16;
+      }
+      return;
+    }
+    danceTimer -= dt;
+    if (danceTimer > 0) return;
+    const reds = kois.filter(k => k.kind === 'red'), inks = kois.filter(k => k.kind !== 'red');
+    if (!reds.length || !inks.length) { danceTimer = 10; return; }
+    const A = inks[Math.floor(Math.random() * inks.length)], B = reds[Math.floor(Math.random() * reds.length)];
+    const ma = A.pts[M >> 1], mb = B.pts[M >> 1];
+    let cx = clamp((ma.x + mb.x) / 2, W * 0.25, W * 0.8), cy = clamp((ma.y + mb.y) / 2, H * 0.22, H * 0.72);
+    if (inTextZone(cx, cy, (A.L + B.L) * 0.4)) { cx = W * 0.66; cy = H * 0.36; }
+    const r = (A.L + B.L) * 0.3;
+    const w = ((A.cruise + B.cruise) / 2 * 1.15 / r) * (Math.random() < 0.5 ? 1 : -1);
+    dance = { pair: [A, B], cx, cy, r, w, ang: Math.atan2(ma.y - cy, ma.x - cx), t: 0, dur: 13 + Math.random() * 6 };
+    A.dance = B.dance = true;
+  }
+
+  /* ================================================================
+     Set-up, render loop and interaction
+     ================================================================ */
+  let P_copy, P_koi, P_shadow, P_sprite, P_comp, quadBuf, meshBuf, meshData;
+  let scene = null, paperTex = null;
+  let ready = false, visible = true, looping = false, last = 0, acc = 0;
+
+  function bindQuad(P) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+    for (let i = 1; i < 4; i++) gl.disableVertexAttribArray(i);
+    const l = P.a.aPos;
+    gl.enableVertexAttribArray(l);
+    gl.vertexAttribPointer(l, 2, gl.FLOAT, false, 0, 0);
+  }
+  function bindMesh(P, buf) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf || meshBuf);
+    for (let i = 0; i < 4; i++) gl.disableVertexAttribArray(i);
+    const set = (name, size, off) => {
+      const l = P.a[name];
+      if (l === undefined || l < 0) return;
+      gl.enableVertexAttribArray(l);
+      gl.vertexAttribPointer(l, size, gl.FLOAT, false, 32, off);
+    };
+    set('aPos', 2, 0); set('aUv', 2, 8); set('aA', 2, 16); set('aC', 2, 24);
+  }
+  function canvasTex(c, old) {
+    if (old) gl.deleteTexture(old);
+    const t = plainTex(1, 1);
+    gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+    return t;
+  }
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    const nw = Math.max(1, rect.width), nh = Math.max(1, rect.height);
+    // Render at the screen's full sharpness, up to about 4K worth of pixels
+    let dpr = Math.min(window.devicePixelRatio || 1, 3);
+    if (nw * nh * dpr * dpr > 8.3e6) dpr = Math.sqrt(8.3e6 / (nw * nh));
+    const changedSize = Math.abs(nw - W) > 2 || Math.abs(nh - H) > 2 || dpr !== DPR;
+    if (!changedSize && scene) return;
+    W = nw; H = nh; DPR = dpr;
+    canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
+    scene = target(canvas.width, canvas.height, scene);
+    paperTex = canvasTex(paintPaper(), paperTex);
+    simResize();
+    measureText();
+    if (ready) { syncKoiCount(); makePetals(); }
+  }
+
+  function syncKoiCount() {
+    const want = W < 640 ? 5 : W < 1100 ? 7 : 9;
+    while (kois.length > want) kois.pop().destroy();
+    while (kois.length < want) kois.push(new Koi(KINDS[kois.length]));
+    for (const k of kois) {
+      // keep everyone in the pond after a resize
+      const h = k.pts[0];
+      if (h.x < -k.L || h.x > W + k.L || h.y < -k.L || h.y > H + k.L) {
+        const nx = W * (0.2 + Math.random() * 0.6), ny = H * (0.2 + Math.random() * 0.6);
+        const dx = nx - h.x, dy = ny - h.y;
+        for (const p of k.pts) { p.x += dx; p.y += dy; }
+      }
+      k.pickGoal();
+    }
+    meshData = new Float32Array(kois.length * FLOATS_PER_KOI);
+  }
+
+  function render() {
+    // Pass 1: the paper, the soft ink bleed beneath each fish, then the koi
+    gl.bindFramebuffer(gl.FRAMEBUFFER, scene.fb);
+    gl.viewport(0, 0, scene.w, scene.h);
+    gl.disable(gl.BLEND);
+    gl.useProgram(P_copy.p); bindQuad(P_copy);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, paperTex);
+    gl.uniform1i(P_copy.u.uTex, 0);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+    const order = kois.slice().sort((a, b) => b.z - a.z);
+    let o = 0;
+    for (const k of order) { k.vbase = o / 8; o = k.writeMesh(meshData, o); }
+    gl.bindBuffer(gl.ARRAY_BUFFER, meshBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, meshData, gl.DYNAMIC_DRAW);
+
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+
+    gl.useProgram(P_shadow.p); bindMesh(P_shadow);
+    gl.uniform2f(P_shadow.u.uRes, W, H);
+    gl.uniform1i(P_shadow.u.uAlb, 0);
+    for (const k of order) {
+      const d = k.L * (0.02 + 0.06 * (1 - k.z));
+      gl.uniform2f(P_shadow.u.uOffset, 0.58 * d, 0.81 * d);
+      gl.uniform1f(P_shadow.u.uAlpha, 0.16 * (1 - k.z * 0.5));
+      gl.uniform1f(P_shadow.u.uBias, 2.5 + 2.0 * (1 - k.z));
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, k.finAlb);
+      for (let f = 0; f < 4; f++) gl.drawArrays(gl.TRIANGLE_STRIP, k.vbase + 2 * M + f * 4, 4);
+      gl.bindTexture(gl.TEXTURE_2D, k.alb);
+      gl.drawArrays(gl.TRIANGLE_STRIP, k.vbase, 2 * M);
+    }
+
+    gl.useProgram(P_koi.p); bindMesh(P_koi);
+    const U = P_koi.u;
+    gl.uniform2f(U.uRes, W, H);
+    gl.uniform2f(U.uOffset, 0, 0);
+    gl.uniform3f(U.uPaper, PAPER[0] / 255, PAPER[1] / 255, PAPER[2] / 255);
+    gl.uniform1i(U.uAlb, 0);
+    gl.activeTexture(gl.TEXTURE0);
+    for (const k of order) {
+      gl.uniform1f(U.uBias, Math.max(0, k.z - 0.2) * 2.6);
+      gl.uniform1f(U.uDepth, k.z);
+      gl.bindTexture(gl.TEXTURE_2D, k.finAlb);
+      for (let f = 0; f < 4; f++) gl.drawArrays(gl.TRIANGLE_STRIP, k.vbase + 2 * M + f * 4, 4);
+      gl.bindTexture(gl.TEXTURE_2D, k.alb);
+      gl.drawArrays(gl.TRIANGLE_STRIP, k.vbase, 2 * M);
+    }
+
+    // Pass 2: through the moving water surface
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.disable(gl.BLEND);
+    gl.useProgram(P_comp.p); bindQuad(P_comp);
+    const C = P_comp.u;
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, scene.tex);
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, waveTex);
+    gl.uniform1i(C.uScene, 0); gl.uniform1i(C.uWave, 1);
+    gl.uniform2f(C.uRes, W, H);
+    gl.uniform2f(C.uWaveScale, W / CELL / gw, H / CELL / gh);
+    gl.uniform2f(C.uWaveOff, 1.5 / gw, 1.5 / gh);
+    gl.uniform1f(C.uTime, time);
+    gl.uniform1f(C.uRefr, 6.0);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+    // Petals float on top of the water, each with a faint shadow
+    writePetals();
+    gl.bindBuffer(gl.ARRAY_BUFFER, petalBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, petalData, gl.DYNAMIC_DRAW);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    gl.useProgram(P_shadow.p); bindMesh(P_shadow, petalBuf);
+    gl.uniform2f(P_shadow.u.uRes, W, H);
+    gl.uniform2f(P_shadow.u.uOffset, 2, 3);
+    gl.uniform1f(P_shadow.u.uAlpha, 0.18);
+    gl.uniform1f(P_shadow.u.uBias, 1.5);
+    gl.activeTexture(gl.TEXTURE0);
+    petals.forEach((p, i) => { gl.bindTexture(gl.TEXTURE_2D, petalTex[p.tex]); gl.drawArrays(gl.TRIANGLES, i * 6, 6); });
+    gl.useProgram(P_sprite.p); bindMesh(P_sprite, petalBuf);
+    gl.uniform2f(P_sprite.u.uRes, W, H);
+    gl.uniform2f(P_sprite.u.uOffset, 0, 0);
+    gl.uniform1f(P_sprite.u.uAlpha, 0.92);
+    gl.uniform1i(P_sprite.u.uAlb, 0);
+    petals.forEach((p, i) => { gl.bindTexture(gl.TEXTURE_2D, petalTex[p.tex]); gl.drawArrays(gl.TRIANGLES, i * 6, 6); });
+    gl.disable(gl.BLEND);
+  }
+
+  function frame(now) {
+    const dt = clamp((now - last) / 1000, 0, 0.05);
+    last = now;
+    time += dt;
+    acc += dt;
+    let n = 0;
+    while (acc >= 1 / 60 && n < 4) { simStep(); acc -= 1 / 60; n++; }
+    if (n === 4) acc = 0;
+    updateDance(dt);
+    for (const k of kois) k.update(dt, time);
+    updatePetals(dt, time);
+    uploadWave();
+    render();
+    if (visible) requestAnimationFrame(frame); else looping = false;
+  }
+  function start() {
+    if (!ready || reduce || looping || !visible) return;
+    looping = true;
+    last = performance.now();
+    requestAnimationFrame(frame);
+  }
+  function still() {
+    if (!ready) return;
+    for (const k of kois) k.pose();
+    uploadWave();
+    render();
+  }
+
+  // Pointer: dragging through the water leaves a wake; a tap sends out a ring
+  const local = e => { const r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  hero.addEventListener('pointermove', e => {
+    const [x, y] = local(e), now = performance.now();
+    if (pointer.on && !reduce) {
+      const dx = x - pointer.x, dy = y - pointer.y, d = Math.hypot(dx, dy);
+      const speed = d / Math.max(1, now - pointer.t) * 1000;
+      const n = Math.min(48, Math.ceil(d / 6));
+      const amp = clamp(0.1 + speed / 5000, 0.1, 0.45);
+      for (let k = 1; k <= n; k++) drop(pointer.x + dx * k / n, pointer.y + dy * k / n, 12, amp);
+      if (speed > 1600) for (const k of kois) k.startle(x, y, 0.6);
+    }
+    pointer.x = x; pointer.y = y; pointer.t = now; pointer.on = true;
+    start();
+  });
+  hero.addEventListener('pointerdown', e => {
+    const [x, y] = local(e);
+    pointer.x = x; pointer.y = y; pointer.t = performance.now(); pointer.on = true;
+    if (!reduce) {
+      drop(x, y, 18, 3);
+      for (const k of kois) k.startle(x, y, 1);
+    }
+    start();
+  });
+  const leave = () => { pointer.on = false; };
+  hero.addEventListener('pointerleave', leave);
+  hero.addEventListener('pointercancel', leave);
+
+  window.addEventListener('resize', () => { if (!P_comp) return; resize(); if (reduce) still(); });
+  new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) start(); }).observe(hero);
+
+  try {
+    quadBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    meshBuf = gl.createBuffer();
+    petalBuf = gl.createBuffer();
+    P_copy = program(VS_QUAD, FS_COPY);
+    P_koi = program(VS_MESH, FS_KOI);
+    P_shadow = program(VS_MESH, FS_SHADOW);
+    P_sprite = program(VS_MESH, FS_SPRITE);
+    P_comp = program(VS_QUAD, FS_COMP);
+    resize();
+    // Sharper brushwork when koi are drawn large on screen
+    const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+    RS = baseL() * 1.2 * DPR > 560 && maxTex >= 2 * TW ? 2 : 1;
+    petalTex = [1, 2, 3].map(s => texFromCanvas(paintPetal(s)));
+    ready = true;
+    syncKoiCount();
+    makePetals();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureText);
+    // Let the koi settle into a natural pose before the first frame
+    for (let i = 0; i < 90; i++) for (const k of kois) k.update(1 / 30, i / 30);
+    time = 3;
+    if (reduce) still(); else start();
+  } catch (err) {
+    console.warn('Koi pond could not start:', err);
+    hero.classList.add('no-gl');
+  }
+})();
+
+</script>
+</body>
+</html>
