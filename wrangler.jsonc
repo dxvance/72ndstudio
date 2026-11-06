@@ -1,0 +1,16 @@
+// Cloudflare deploy config for 72ndstudio.com.
+// Static files in this folder are the portfolio. worker/index.js mounts the
+// separate app Workers under paths like /digi/.
+{
+  "name": "72ndstudio",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
+  },
+  "services": [
+    { "binding": "DIGI", "service": "digi" }
+    // { "binding": "RUBRIC", "service": "rubric" }
+  ]
+}
