@@ -13,7 +13,7 @@
 <meta name="theme-color" content="#F4F0E7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Schibsted+Grotesk:wght@400;500;600&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&text=%E9%B2%A4&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -25,7 +25,6 @@
     --accent: #B3321F;
     --sans: "Schibsted Grotesk", system-ui, sans-serif;
     --serif: "Shippori Mincho", "Hiragino Mincho ProN", Georgia, serif;
-    --sig: "Mrs Saint Delafield", "Snell Roundhand", cursive;
     --gutter: 16px;
     --gap: 12px;
     --head-h: 64px;
@@ -62,10 +61,10 @@
   }
   .site-head a { text-decoration: none; }
   .head-name { display: block; }
-  .head-sig {
-    justify-self: center; font-family: var(--sig); font-size: 40px; line-height: .7;
-    letter-spacing: 0; text-transform: none; padding-top: 6px;
-  }
+  .head-social { justify-self: center; display: flex; gap: 2px; margin-top: -4px; }
+  .head-social a { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; color: var(--ink); transition: color .2s ease; }
+  .head-social a:hover { color: var(--accent); }
+  .head-social svg { width: 18px; height: 18px; }
   .head-nav, .head-time { display: none; }
   .head-end { justify-self: end; display: flex; align-items: start; gap: 18px; }
   .menu-btn {
@@ -93,7 +92,7 @@
   }
   @media (min-width: 760px) {
     .site-head { grid-template-columns: repeat(4, 1fr) auto; }
-    .head-sig { justify-self: start; }
+    .head-social { justify-self: start; margin-left: -7px; }
     .head-nav, .head-time { display: block; }
     .head-nav a { display: block; }
     .head-nav a:hover, .head-name:hover { color: var(--accent); }
@@ -322,7 +321,12 @@
 
 <header class="site-head label" id="site-head">
   <a class="head-name" href="index.html">David<br>72nd Studio</a>
-  <a class="head-sig" href="index.html" aria-label="Home">D.</a>
+  <nav class="head-social" aria-label="Find me online">
+    <a href="mailto:davidxhvance@gmail.com" aria-label="Email me" title="Email me"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+    <a href="https://www.linkedin.com/in/your-profile" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    <a href="https://github.com/dxvance" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+    <a href="https://www.instagram.com/dxvance" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+  </nav>
   <nav class="head-nav" aria-label="Sections">
     <a href="index.html#work">Work</a>
     <a href="index.html#projects">Projects</a>
