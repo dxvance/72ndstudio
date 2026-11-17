@@ -304,6 +304,13 @@
   .site-foot a:hover { color: var(--ink); }
   @media (min-width: 760px) { .site-foot { grid-template-columns: repeat(4, 1fr); } .site-foot > :last-child { justify-self: end; } }
   /* ---------- About page ---------- */
+  .socials { display: flex; gap: 10px; margin: 72px var(--gutter) 0; padding-top: 24px; border-top: 1px solid var(--rule); }
+  .socials a {
+    width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid var(--rule); border-radius: 50%;
+    color: var(--ink); transition: color .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .socials a:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+  .socials svg { width: 22px; height: 22px; }
   .site-head { background: rgba(244, 240, 231, .9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom-color: var(--rule); }
   .head-nav a[aria-current="page"], .menu-panel a[aria-current="page"] { color: var(--accent); }
   .about-page { padding-top: calc(var(--head-h) + 72px); }
@@ -358,12 +365,12 @@
         <div><dt class="label">Hobbies</dt><dd>Rock climbing, running, piano, Mandarin, film</dd></div>
       </dl>
     </div>
-    <div class="contact">
-      <a href="mailto:davidxhvance@gmail.com"><span class="label">Email · fastest way to reach me</span><strong>davidxhvance@gmail.com</strong></a>
-      <a href="https://www.linkedin.com/in/your-profile"><span class="label">LinkedIn</span><strong>/in/your-profile</strong></a>
-      <a href="https://github.com/dxvance"><span class="label">GitHub</span><strong>@dxvance</strong></a>
-      <a href="https://www.instagram.com/dxvance"><span class="label">Instagram</span><strong>@dxvance</strong></a>
-    </div>
+    <nav class="socials" aria-label="Find me online">
+      <a href="mailto:davidxhvance@gmail.com" aria-label="Email me" title="Email me"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      <a href="https://www.linkedin.com/in/your-profile" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="https://github.com/dxvance" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+      <a href="https://www.instagram.com/dxvance" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    </nav>
   </section>
 
 </main>
