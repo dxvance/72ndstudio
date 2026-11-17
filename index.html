@@ -180,7 +180,7 @@
       </article>
 
       <article class="project p2 reveal">
-        <div class="art" data-art="phone" data-seed="4"></div>
+        <div class="art"><img src="sheng.jpg" alt="Sheng’s Study screen on an iPhone: a flashcard showing 回答 (verb, noun), with 20 new, 4 learning and 69 review cards and a Show Answer button" width="960" height="1200" loading="lazy"></div>
         <div class="project-copy">
           <div class="project-meta label"><span><span class="no">02</span>&ensp;Language learning</span><span>2026</span></div>
           <h3>Sheng <em>flashcards</em></h3>
@@ -201,11 +201,11 @@
       </article>
 
       <article class="project pair p4 reveal">
-        <div class="art"><img src="pond.jpg" alt="The ink-and-wash pond from this site’s home page: grey and vermilion carp swimming inside a brushed circle, with willow strands and distant mountains" width="960" height="1200" loading="lazy"></div>
+        <div class="art"><img src="pond.jpg" alt="The ink-and-wash pond from this site’s home page: one black carp circling inside a brushed circle among vermilion carp, with willow strands and distant mountains" width="960" height="1200" loading="lazy"></div>
         <div class="project-copy">
           <div class="project-meta label"><span><span class="no">04</span>&ensp;72nd Studio</span><span>2026</span></div>
           <h3>This <em>website</em></h3>
-          <p>An ink-and-wash pond painted entirely in code: brushwork, ripples, and nine carp (<span class="cjk" lang="zh-Hans">九鲤</span>, a wish for abundance) that swim, glide and circle each other.</p>
+          <p>An ink-and-wash pond painted entirely in code: brushwork, ripples, and nine carp (<span class="cjk" lang="zh-Hans">九鲤</span>, eight vermilion and one black, for prosperity and protection) that swim, glide and circle each other.</p>
           <ul class="tags" aria-label="Built with"><li>WebGL</li><li>Canvas</li><li>HTML &amp; CSS</li></ul>
           <div class="project-links label">
             <a class="text-link" href="https://github.com/dxvance/72ndstudio" target="_blank" rel="noopener">View the code <span class="arrow" aria-hidden="true">↗</span></a>
@@ -415,8 +415,9 @@
     grey: { body: [70, 68, 63], belly: [138, 134, 127], core: 0.86, edge: 0.66, net: 'rgba(36,35,32,', netA: 0.3, fin: [130, 126, 119], finA: 0.6, tail: [122, 118, 111], gill: 'rgba(36,35,32,0.3)' },
     red:  { body: [182, 52, 34], belly: [214, 104, 80], core: 0.94, edge: 0.8, net: 'rgba(120,30,18,', netA: 0.36, fin: [204, 96, 74], finA: 0.72, tail: [206, 100, 78], gill: 'rgba(120,30,18,0.4)' }
   };
-  // Nine carp (九鲤) is the traditional wish for abundance; vermilion kept to two, fewer fish on small screens
-  const KINDS = ['ink', 'red', 'grey', 'ink', 'grey', 'ink', 'grey', 'red', 'ink'];
+  // Nine carp (九鲤): eight vermilion and one black, the feng shui arrangement for prosperity and protection.
+  // The black carp comes first so it stays in the pond on small screens, which show fewer fish.
+  const KINDS = ['ink', 'red', 'red', 'red', 'red', 'red', 'red', 'red', 'red'];
   const PAPER = [246, 245, 240];
 
   const OFF = 4000;
