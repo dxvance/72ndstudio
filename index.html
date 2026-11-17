@@ -303,6 +303,11 @@
   .site-foot a { text-decoration: none; }
   .site-foot a:hover { color: var(--ink); }
   @media (min-width: 760px) { .site-foot { grid-template-columns: repeat(4, 1fr); } .site-foot > :last-child { justify-self: end; } }
+  .more-link { margin: 72px var(--gutter) 0; border-top: 1px solid var(--rule); padding-top: 22px; }
+  .more-link a { text-decoration: none; display: inline-block; }
+  .more-link .label { display: block; color: var(--muted); margin-bottom: 6px; }
+  .more-link strong { font-family: var(--serif); font-weight: 800; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.1; }
+  .more-link a:hover strong { color: var(--accent); }
 </style>
 </head>
 <body>
@@ -314,7 +319,7 @@
     <a href="#work">Work</a>
     <a href="#projects">Projects</a>
     <a href="#education">Education</a>
-    <a href="#about">About me</a>
+    <a href="about.html">About me</a>
   </nav>
   <div class="head-time">Local time, Columbus<br><span class="clock" aria-live="off"><span data-h>00</span><span class="sep">.</span><span data-m>00</span></span></div>
   <div class="head-end">
@@ -326,7 +331,7 @@
   <a href="#work">Work</a>
   <a href="#projects">Projects</a>
   <a href="#education">Education</a>
-  <a href="#about">About me</a>
+  <a href="about.html">About me</a>
 </nav>
 
 <section class="hero" id="top" aria-label="Koi pond">
@@ -337,7 +342,7 @@
       <p class="lead">Data entry by day, carrying plates by night, writing code whenever I’m supposed to be sleeping. The career plan is still&nbsp;loading.</p>
       <div class="hero-meta label">
         <span>Ohio State<br>alum &amp; student</span>
-        <a href="#about">Based in<br>Columbus, Ohio</a>
+        <a href="about.html">Based in<br>Columbus, Ohio</a>
       </div>
       <div class="actions">
         <a class="btn primary" href="mailto:davidxhvance@gmail.com">Email me</a>
@@ -448,32 +453,8 @@
     </div>
   </section>
 
-  <section class="chapter" id="about" aria-labelledby="about-title">
-    <div class="chapter-head">
-      <h2 id="about-title">About me</h2>
-      <p class="note label">Columbus, Ohio</p>
-    </div>
-    <div class="about">
-      <figure class="portrait card" style="margin:0">
-        <div class="cap label"><span>Portrait</span><span>Atlanta, 2025</span></div>
-        <div class="art"><img src="portrait.jpg" alt="David smiling and throwing a peace sign at the edge of the field at the college football national championship" width="960" height="1200" loading="lazy"></div>
-      </figure>
-      <div class="about-text">
-        <p class="lead">Hey, I’m David! When I’m not working, you’ll find me on a climbing wall, at the piano, or halfway through a side project I definitely don’t have time for.</p>
-        <p>I run to clear my head. A sub-20 5K is the goal, and so far the 5K is winning. I’m relearning Mandarin one tone at a time, and I nerd out over Greek and Chinese mythology. Ask me about a hypothetical Marvel superhero matchup or how stock options work, and I’ll talk your ear off. I’m equally confident about both and am only right about one. If there’s a new Christopher Nolan movie out, I’m already in an IMAX seat on opening weekend.</p>
-      </div>
-      <dl class="facts">
-        <div><dt class="label">Based in</dt><dd>Columbus, Ohio</dd></div>
-        <div><dt class="label">Studying</dt><dd>B.S. in Economics, Ohio State University, expected 2028</dd></div>
-        <div><dt class="label">Hobbies</dt><dd>Rock climbing, running, piano, Mandarin, film</dd></div>
-      </dl>
-    </div>
-    <div class="contact">
-      <a href="mailto:davidxhvance@gmail.com"><span class="label">Email · fastest way to reach me</span><strong>davidxhvance@gmail.com</strong></a>
-      <a href="https://www.linkedin.com/in/your-profile"><span class="label">LinkedIn</span><strong>/in/your-profile</strong></a>
-      <a href="https://github.com/dxvance"><span class="label">GitHub</span><strong>@dxvance</strong></a>
-      <a href="https://www.instagram.com/dxvance"><span class="label">Instagram</span><strong>@dxvance</strong></a>
-    </div>
+  <section class="more-link" aria-label="About me">
+    <a href="about.html"><span class="label">Climbing, piano, Nolan films and the rest</span><strong>More about me →</strong></a>
   </section>
 
 </main>
