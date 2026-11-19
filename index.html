@@ -3,9 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>David | 72nd Studio</title>
-<meta name="description" content="David, from Columbus, Ohio. Data entry by day, carrying plates by night, writing code whenever he's supposed to be sleeping.">
+<title>David · Software, data &amp; creative development | 72nd Studio</title>
+<meta name="description" content="David builds things at the intersection of technology, data and creativity: Sora, a personal finance app; Sheng, a Chinese language-learning app; and this ink-and-wash website. Columbus, Ohio.">
 <meta name="color-scheme" content="light">
+<link rel="canonical" href="https://72ndstudio.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="72nd Studio">
+<meta property="og:title" content="David · 72nd Studio">
+<meta property="og:description" content="Building things at the intersection of technology, data and creativity. Selected work: Sora, Sheng and 72nd Studio.">
+<meta property="og:url" content="https://72ndstudio.com/">
+<meta property="og:image" content="https://72ndstudio.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="David, 72nd Studio: an ink-and-wash pond with vermilion carp and a brushed circle">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -53,21 +64,25 @@
   }
   .intro h1 {
     display: flex; align-items: flex-start; gap: .14em; margin: 0;
-    font-family: var(--display); font-weight: 400; font-size: clamp(5rem, 17vw, 11.5rem);
+    font-family: var(--display); font-weight: 400; font-size: clamp(4.4rem, 15vw, 10rem);
     line-height: .86; letter-spacing: -.035em; color: var(--ink);
   }
   .intro h1 .seal { font-size: .17em; width: 1.6em; height: 1.6em; margin-top: .55em; letter-spacing: 0; }
   .intro h1 .seal span { font-size: 1.14em; }
-  .intro .lead {
-    font-family: var(--display); font-size: clamp(1.4rem, 2.3vw, 1.95rem); line-height: 1.32;
-    max-width: 21em; margin: 26px 0 0; color: var(--ink-2); letter-spacing: -.003em;
+  .hero-mark { margin-bottom: 14px; }
+  .intro .statement {
+    font-family: var(--display); font-size: clamp(1.55rem, 2.9vw, 2.5rem); line-height: 1.12;
+    max-width: 17em; margin: 22px 0 0; color: var(--ink); letter-spacing: -.01em;
   }
+  .intro .lead {
+    font-family: var(--display); font-style: italic; font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.4;
+    max-width: 28em; margin: 14px 0 0; color: var(--ink-2);
+  }
+  .focus { display: flex; flex-wrap: wrap; gap: 6px 0; list-style: none; padding: 0; margin: 0; color: var(--muted); }
+  .focus li + li::before { content: "·"; margin: 0 10px; color: var(--rule-strong); }
   .hero-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 22px 40px; margin-top: 34px; }
   .actions { display: flex; flex-wrap: wrap; gap: 10px; }
   .actions a { pointer-events: auto; }
-  .hero-meta { display: flex; gap: 32px; color: var(--muted); }
-  .hero-meta a { pointer-events: auto; text-decoration: none; }
-  .hero-meta a:hover { color: var(--accent); }
   .scroll-cue {
     position: absolute; right: var(--gutter); bottom: 30px; z-index: 2;
     text-decoration: none; color: var(--muted); display: flex; align-items: center; gap: 10px;
@@ -85,7 +100,8 @@
   }
   @media (max-width: 520px) {
     .intro { padding-bottom: 76px; }
-    .hero-meta { display: none; }
+    .focus { display: none; }
+    .actions .btn.ghost:last-child { display: none; }
     .scroll-cue { display: none; }
     .actions .btn { flex: 1 1 auto; justify-content: center; }
   }
@@ -96,7 +112,7 @@
 </head>
 <body>
 
-<a class="visually-hidden" href="#projects">Skip to content</a>
+<a class="skip label" href="#projects">Skip to content</a>
 
 <header class="site-head label" id="site-head">
   <a class="head-name" href="#top" aria-label="David, 72nd Studio, back to top"><span class="seal" aria-hidden="true">鲤</span><span>David<br>72nd Studio</span></a>
@@ -108,9 +124,10 @@
   </nav>
   <nav class="head-nav" aria-label="Sections">
     <a href="#projects">Projects</a>
-    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
     <a href="#education">Education</a>
     <a href="about.html">About me</a>
+    <a href="resume.pdf">Résumé ↓</a>
   </nav>
   <div class="head-time">Local time, Columbus<br><span class="clock" aria-live="off"><span data-h>00</span><span class="sep">.</span><span data-m>00</span></span></div>
   <div class="head-end">
@@ -120,10 +137,11 @@
 </header>
 <div class="menu-panel" id="menu-panel">
   <nav class="menu-links" aria-label="Sections">
-    <a href="#projects"><span class="label">01</span>Projects</a>
-    <a href="#work"><span class="label">02</span>Work</a>
-    <a href="#education"><span class="label">03</span>Education</a>
-    <a href="about.html"><span class="label">04</span>About me</a>
+    <a href="#projects"><span class="label">02</span>Projects</a>
+    <a href="#experience"><span class="label">03</span>Experience</a>
+    <a href="#education"><span class="label">04</span>Education</a>
+    <a href="about.html"><span class="label">05</span>About me</a>
+    <a href="resume.pdf"><span class="label">↓</span>Résumé</a>
   </nav>
   <nav class="social" aria-label="Find me online">
     <a href="mailto:davidxhvance@gmail.com" aria-label="Email me" title="Email me"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
@@ -137,17 +155,17 @@
   <canvas id="pond" aria-hidden="true"></canvas>
   <div class="mist" aria-hidden="true"></div>
   <div class="intro">
+    <div class="section-mark label hero-mark"><span class="no">01</span><span class="bar"></span><span>Introduction</span></div>
     <h1>David<span class="seal" aria-hidden="true" title="鲤, carp"><span>鲤</span></span></h1>
+    <p class="statement">Building things at the intersection of technology, data &amp; creativity.</p>
     <p class="lead">Data entry by day, carrying plates by night, writing code whenever I’m supposed to be sleeping. The career plan is still&nbsp;loading.</p>
     <div class="hero-foot">
       <div class="actions">
-        <a class="btn primary" href="mailto:davidxhvance@gmail.com">Email me</a>
-        <a class="btn ghost" href="resume.pdf">Download résumé <span class="arrow" aria-hidden="true">↓</span></a>
+        <a class="btn primary" href="#projects">Selected work <span class="arrow" aria-hidden="true">↓</span></a>
+        <a class="btn ghost" href="mailto:davidxhvance@gmail.com">Email me</a>
+        <a class="btn ghost" href="resume.pdf">Résumé</a>
       </div>
-      <div class="hero-meta label">
-        <span>Ohio State<br>alum &amp; student</span>
-        <a href="about.html">Based in<br>Columbus, Ohio</a>
-      </div>
+      <ul class="focus label" aria-label="What I work on"><li>Software development</li><li>Data &amp; analytics</li><li>Independent projects</li></ul>
     </div>
   </div>
   <a class="scroll-cue label" href="#projects">Scroll</a>
@@ -158,68 +176,96 @@
   <section class="chapter" id="projects" aria-labelledby="projects-title">
     <div class="chapter-head reveal">
       <div class="head-main">
-        <div class="section-mark label"><span class="no">01</span><span class="bar"></span><span>Projects</span><span class="cjk">作品</span></div>
-        <h2 class="chapter-title" id="projects-title">Things I make <em>for fun</em></h2>
+        <div class="section-mark label"><span class="no">02</span><span class="bar"></span><span>Projects</span><span class="cjk">作品</span></div>
+        <h2 class="chapter-title" id="projects-title">Selected <em>work</em></h2>
       </div>
       <p class="chapter-intro">Apps I built because I wanted them to exist: one for my money, one for my Mandarin, and the page you’re reading.</p>
     </div>
 
     <div class="projects">
-      <article class="project p1 reveal">
+      <article class="project p1 reveal" aria-labelledby="sora-title">
         <div class="art"><img src="sora.jpg" alt="Sora’s budget screen on an iPhone, showing money left to budget, income, expenses, savings and net cashflow" width="960" height="1200" loading="lazy"></div>
         <div class="project-copy">
-          <div class="project-meta label"><span><span class="no">01</span>&ensp;Personal finance</span><span>2026</span></div>
-          <h3>Sora <em>budgeting</em></h3>
-          <p>A budgeting app I built for me and a friend. It syncs bank accounts and handles budgets, split transactions, recurring bills, investments and net worth, with a Face ID lock to keep it private.</p>
-          <ul class="tags" aria-label="Built with"><li>Swift</li><li>SwiftUI</li><li>TypeScript</li><li>React</li><li>Supabase</li><li>CloudKit</li></ul>
+          <div class="project-meta label"><span><span class="no">01</span>&ensp;Financial technology · iOS · Web</span><span>2026</span></div>
+          <h3 id="sora-title">Sora <em>budgeting</em></h3>
+          <p class="kicker">Personal finance, built from scratch.</p>
+          <p>A budgeting app that pulls bank accounts, budgets, investments and net worth into one place, on iPhone, iPad and the web. I built it for me and a friend.</p>
           <div class="project-links label">
-            <a class="text-link" href="https://digi.72ndstudio.com" target="_blank" rel="noopener">Web app <span class="arrow" aria-hidden="true">↗</span></a>
-            <span class="status live">iPhone, iPad &amp; web</span>
+            <a class="text-link" href="https://digi.72ndstudio.com" target="_blank" rel="noopener">Web app (sign-in required) <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
+        </div>
+
+        <div class="case reveal">
+          <section class="case-part">
+            <h4 class="label"><span class="no">i.</span> The problem</h4>
+            <p>With accounts spread across several banks, cards and loans, it was hard to see where I actually stood, or what I could safely spend this month.</p>
+          </section>
+          <section class="case-part">
+            <h4 class="label"><span class="no">ii.</span> The solution</h4>
+            <p>One app for all of it: bank sync, envelope and zero-based budgets, recurring bills, split transactions, loan payoff plans, investments and net worth over time.</p>
+          </section>
+          <section class="case-part">
+            <h4 class="label"><span class="no">iii.</span> What I built</h4>
+            <ul class="notes">
+              <li>A native SwiftUI app for iPhone and iPad, and a React web app that installs to the home screen and works offline.</li>
+              <li>Bank sync through Plaid, behind a small Supabase server, with duplicate detection when imports overlap.</li>
+              <li>Sync through each person’s private iCloud, so the same budget follows an Apple ID across phone and browser.</li>
+              <li>Separate data for each person: their own Apple ID, their own access key (only its hash is stored), and a Face ID lock.</li>
+              <li>The money math (interest models, payoff plans, budget rollovers) checked by more than 400 automated tests.</li>
+            </ul>
+          </section>
+          <section class="case-part">
+            <h4 class="label"><span class="no">iv.</span> Built with</h4>
+            <ul class="tags"><li>Swift</li><li>SwiftUI</li><li>TypeScript</li><li>React</li><li>Supabase</li><li>CloudKit</li><li>Plaid</li></ul>
+            <p class="stat label">About 27,000 lines of Swift and 15,000 of TypeScript</p>
+          </section>
+          <figure class="case-shots">
+            <div class="art"><img src="sora-accounts.jpg" alt="Sora’s Accounts screen with demo data: net worth over the past month and balances for cash, credit cards, loans and investments" width="960" height="1200" loading="lazy"></div>
+            <div class="art"><img src="sora-activity.jpg" alt="Sora’s transactions list with demo data, grouped by day with merchant, account and category" width="960" height="1200" loading="lazy"></div>
+            <figcaption class="label">Accounts and activity, shown with demo data</figcaption>
+          </figure>
         </div>
       </article>
 
-      <article class="project p2 reveal">
+      <article class="project p2 reveal" aria-labelledby="sheng-title">
         <div class="art"><img src="sheng.jpg" alt="Sheng’s Study screen on an iPhone: a flashcard showing 回答 (verb, noun), with 20 new, 4 learning and 69 review cards and a Show Answer button" width="960" height="1200" loading="lazy"></div>
         <div class="project-copy">
-          <div class="project-meta label"><span><span class="no">02</span>&ensp;Language learning</span><span>2026</span></div>
-          <h3>Sheng <em>flashcards</em></h3>
-          <p>A spaced-repetition flashcard app for learning Chinese, designed and built in Swift and now on its way to the App Store.</p>
+          <div class="project-meta label"><span><span class="no">02</span>&ensp;Language learning · iOS</span><span>2026</span></div>
+          <h3 id="sheng-title">Sheng</h3>
+          <p class="kicker">A Chinese language-learning app.</p>
+          <p>Designed and built in Swift for my own Mandarin practice, and now on its way to the App Store.</p>
+          <dl class="features">
+            <div><dt>Spaced repetition</dt><dd>Flashcards scheduled into new, learning and review queues, so words come back just before they’re forgotten.</dd></div>
+            <div><dt>Daily reading</dt><dd>A short reading passage each day with a comprehension quiz, built into the same app.</dd></div>
+            <div><dt>Words and tones</dt><dd>A vocabulary library with pinyin colored by tone, synced across devices.</dd></div>
+          </dl>
           <ul class="tags" aria-label="Built with"><li>Swift</li><li>SwiftUI</li><li>Supabase</li></ul>
           <p class="note label"><span class="status">Heading to the App Store</span></p>
         </div>
       </article>
 
-      <article class="project pair p3 reveal">
-        <div class="art" data-art="moon" data-seed="8"></div>
-        <div class="project-copy">
-          <div class="project-meta label"><span><span class="no">03</span>&ensp;Inside Sheng</span><span>In progress</span></div>
-          <h3>Daily <em>reading</em></h3>
-          <p>A short daily reading passage with a comprehension quiz, built into the flashcard app for my own Mandarin practice.</p>
-          <ul class="tags" aria-label="Built with"><li>Swift</li><li>SwiftUI</li></ul>
-        </div>
-      </article>
-
-      <article class="project pair p4 reveal">
+      <article class="project p3 reveal" aria-labelledby="site-title">
         <div class="art"><img src="pond.jpg" alt="The ink-and-wash pond from this site’s home page: vermilion carp swimming around a single heavy brush-stroke circle, one black carp below it, with willow strands and distant mountains" width="960" height="1200" loading="lazy"></div>
         <div class="project-copy">
-          <div class="project-meta label"><span><span class="no">04</span>&ensp;72nd Studio</span><span>2026</span></div>
-          <h3>This <em>website</em></h3>
-          <p>An ink-and-wash pond painted entirely in code: brushwork, ripples, and nine carp (<span class="cjk" lang="zh-Hans">九鲤</span>, eight vermilion and one black, for prosperity and protection) that swim, glide and circle each other.</p>
+          <div class="project-meta label"><span><span class="no">03</span>&ensp;Creative development · WebGL</span><span>2026</span></div>
+          <h3 id="site-title">72nd <em>Studio</em></h3>
+          <p class="kicker">This website.</p>
+          <p>An ink-and-wash pond painted entirely in code: one loaded brush stroke, ripples, and nine carp (<span class="cjk" lang="zh-Hans">九鲤</span>, eight vermilion and one black) that swim, glide and circle each other. No frameworks, no build step.</p>
           <ul class="tags" aria-label="Built with"><li>WebGL</li><li>Canvas</li><li>HTML &amp; CSS</li></ul>
           <div class="project-links label">
-            <a class="text-link" href="https://github.com/dxvance/72ndstudio" target="_blank" rel="noopener">View the code <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="text-link" href="https://github.com/dxvance/72ndstudio" target="_blank" rel="noopener">Source on GitHub <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
         </div>
       </article>
     </div>
   </section>
 
-  <section class="chapter" id="work" aria-labelledby="work-title">
+  <section class="chapter" id="experience" aria-labelledby="experience-title">
+    <span id="work" aria-hidden="true"></span>
     <div class="chapter-head flip reveal">
       <div class="head-main">
-        <div class="section-mark label"><span class="no">02</span><span class="bar"></span><span>Work</span><span class="cjk">工作</span></div>
-        <h2 class="chapter-title" id="work-title">Work</h2>
+        <div class="section-mark label"><span class="no">03</span><span class="bar"></span><span>Experience</span><span class="cjk">工作</span></div>
+        <h2 class="chapter-title" id="experience-title">Experience</h2>
       </div>
       <p class="chapter-intro">Where the day job and the weekend go.</p>
     </div>
@@ -229,7 +275,8 @@
         <div class="entry-body">
           <h3>Clinical Research Assistant</h3>
           <div class="where label">Ohio State</div>
-          <p>Help keep clinical trial data accurate and organized, working alongside research teams.</p>
+          <p>I work on the data side of clinical trials: entering and checking study data against medical records, resolving data queries with study teams, and keeping records in line with study protocols and patient-privacy rules.</p>
+          <ul class="tags" aria-label="Skills"><li>Data integrity</li><li>Documentation</li><li>Research coordination</li><li>Clinical data systems</li></ul>
         </div>
       </article>
       <article class="entry reveal">
@@ -243,6 +290,7 @@
             <li>Design hands-on activities so the concepts actually stick.</li>
             <li>Grade exams and assignments and keep track of how each student is doing.</li>
           </ul>
+          <ul class="tags" aria-label="Skills"><li>Lesson planning</li><li>Instructional design</li><li>Assessment</li></ul>
         </div>
       </article>
     </div>
@@ -251,10 +299,10 @@
   <section class="chapter" id="education" aria-labelledby="education-title">
     <div class="chapter-head reveal">
       <div class="head-main">
-        <div class="section-mark label"><span class="no">03</span><span class="bar"></span><span>Education</span><span class="cjk">学历</span></div>
+        <div class="section-mark label"><span class="no">04</span><span class="bar"></span><span>Education</span><span class="cjk">学历</span></div>
         <h2 class="chapter-title" id="education-title">Education</h2>
       </div>
-      <p class="chapter-intro">The Ohio State University, twice.</p>
+      <p class="chapter-intro">A finished degree in biochemistry, and one in economics on the way, both at Ohio State.</p>
     </div>
     <div class="entries offset">
       <article class="entry reveal">
@@ -287,7 +335,7 @@
 
   <section class="more-link reveal" aria-label="About me">
     <a href="about.html">
-      <span class="label"><span style="color: var(--accent)">04</span>&ensp;About · <span class="cjk">关于</span><br>Climbing, piano, Nolan films and the rest</span>
+      <span class="label"><span style="color: var(--accent)">05</span>&ensp;About · <span class="cjk">关于</span><br>Climbing, piano, Nolan films and how to reach me</span>
       <strong>More about me <span class="arrow" aria-hidden="true">→</span></strong>
     </a>
   </section>
@@ -299,7 +347,7 @@
 <footer class="site-foot label">
   <span>© <span id="yr"></span> David</span>
   <span>72nd Studio</span>
-  <span>Columbus, Ohio</span>
+  <span>Columbus, Ohio · <a href="mailto:davidxhvance@gmail.com">Email</a> · <a href="resume.pdf">Résumé</a></span>
   <a href="#top">Back to top</a>
 </footer>
 
@@ -1417,8 +1465,10 @@
     const rect = canvas.getBoundingClientRect();
     const nw = Math.max(1, rect.width), nh = Math.max(1, rect.height);
     // Render at the screen's full sharpness, up to about 4K worth of pixels
-    let dpr = Math.min(window.devicePixelRatio || 1, 3);
-    if (nw * nh * dpr * dpr > 8.3e6) dpr = Math.sqrt(8.3e6 / (nw * nh));
+    // Phones get a lighter pond: at most 2x pixels and a smaller budget, which keeps scrolling smooth
+    const phone = nw < 700, budget = phone ? 2.4e6 : 8.3e6;
+    let dpr = Math.min(window.devicePixelRatio || 1, phone ? 2 : 3);
+    if (nw * nh * dpr * dpr > budget) dpr = Math.sqrt(budget / (nw * nh));
     const changedSize = Math.abs(nw - W) > 2 || Math.abs(nh - H) > 2 || dpr !== DPR;
     if (!changedSize && scene) return;
     W = nw; H = nh; DPR = dpr;
