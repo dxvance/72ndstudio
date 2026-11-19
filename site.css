@@ -32,8 +32,9 @@
   /* Barely-there paper fibre, drawn once as an SVG */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .42 0 0 0 0 .36 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
 }
-@media (min-width: 760px) { :root { --gutter: 32px; --gap: 20px; } }
-@media (min-width: 1600px) { :root { --gutter: 56px; } }
+/* On wide screens the side margin grows so content sits in a centred column of at most --max;
+   full-bleed art (the pond, the mountains) still runs edge to edge */
+@media (min-width: 760px) { :root { --max: 1160px; --gutter: max(32px, calc((100% - var(--max)) / 2)); --gap: 20px; } }
 
 /* ---------- Base ---------- */
 * { box-sizing: border-box; }
@@ -137,7 +138,7 @@ img { max-width: 100%; }
   .head-name, .head-nav, .head-time { padding-top: 4px; }
   .site-head .head-social { display: flex; margin: -4px 0 0 -9px; }
   .head-nav { display: grid; grid-template-rows: repeat(2, auto); grid-auto-flow: column; justify-content: start; gap: 2px 28px; }
-  .head-nav a { display: block; transition: color .2s ease; }
+  .head-nav a { display: block; white-space: nowrap; transition: color .2s ease; }
   .head-nav a:hover, .head-nav a[aria-current="page"] { color: var(--accent); }
   .head-time { display: block; color: var(--ink-2); }
   .menu-btn, .menu-panel { display: none !important; }

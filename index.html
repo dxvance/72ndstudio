@@ -72,7 +72,7 @@
   .hero-mark { margin-bottom: 14px; }
   .intro .statement {
     font-family: var(--display); font-size: clamp(1.55rem, 2.9vw, 2.5rem); line-height: 1.12;
-    max-width: 17em; margin: 22px 0 0; color: var(--ink); letter-spacing: -.01em;
+    max-width: 13.5em; margin: 22px 0 0; color: var(--ink); letter-spacing: -.01em;
   }
   .intro .lead {
     font-family: var(--display); font-style: italic; font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.4;
@@ -802,8 +802,10 @@
     // One brushed circle (圆) in a single loaded stroke: the brush lands heavy at the lower left,
     // sweeps clockwise round the pond, and runs dry into split bristles before it closes
     const small = W < 700;
-    const ecx = small ? W * 0.52 : W * 0.63, ecy = small ? H * 0.3 : H * 0.44;
     const ER = Math.min(W, H) * (small ? 0.3 : 0.33);
+    // On wide screens the circle keeps to the right of the centred content column, clear of the headline
+    const colRight = W - Math.max(32, (W - 1160) / 2);
+    const ecx = small ? W * 0.52 : Math.max(W * 0.6, Math.min(colRight - ER * 0.9, W - ER * 1.1)), ecy = small ? H * 0.3 : H * 0.44;
     const a0 = 2.05, sweep = Math.PI * 1.9, N = 420;
     const S = Math.min(W, H) / 900 + 0.25;
     // Stroke width: a blunt, fat landing, then a long taper
